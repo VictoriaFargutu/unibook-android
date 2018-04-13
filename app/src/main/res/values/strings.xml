@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Unibook</string>
+    <string name="Login">Login</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="logo">This is Logo</string>
+    <string name="register">Create new account</string>
+    <string name="title_activity_splash">SplashActivity</string>
+</resources>
