@@ -8,12 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.fargutuvictoria.unibook.R;
-import com.fargutuvictoria.unibook.UnibookApplication;
-import com.fargutuvictoria.unibook.di.component.DaggerLoginComponent;
-import com.fargutuvictoria.unibook.di.module.LoginModule;
 import com.fargutuvictoria.unibook.ui.home.HomeActivity;
-
-import javax.inject.Inject;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
@@ -21,20 +16,15 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private EditText mPassword;
     private Button mLoginBtn;
 
-    @Inject
     LoginContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DaggerLoginComponent.builder()
-                .appComponent(UnibookApplication.getInstance().getComponent())
-                .loginModule(new LoginModule(this))
-                .build()
-                .inject(this);
-
         setContentView(R.layout.activity_login);
+
+        mPresenter = new LoginPresenter(this);
 
         mUsername = findViewById(R.id.usernameEdit);
         mPassword = findViewById(R.id.passwordEdit);

@@ -1,6 +1,6 @@
 package com.fargutuvictoria.unibook.ui.home;
 
-import com.fargutuvictoria.commons.preferences.SharedPreferencesHandler;
+import com.fargutuvictoria.unibook.preferences.SharedPreferencesHandler;
 
 public class HomePresenter implements HomeContract.Presenter {
     private HomeContract.View mView;

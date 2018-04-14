@@ -2,9 +2,10 @@ package com.fargutuvictoria.unibook.ui.splash;
 
 import com.fargutuvictoria.commons.model.ExceptionInfo;
 import com.fargutuvictoria.commons.model.User;
-import com.fargutuvictoria.commons.preferences.SharedPreferencesHandler;
 import com.fargutuvictoria.unibook.auth.UserSession;
 import com.fargutuvictoria.unibook.network.interactor.session.validation.SessionValidationInteractor;
+import com.fargutuvictoria.unibook.network.interactor.session.validation.SessionValidationInteractorImpl;
+import com.fargutuvictoria.unibook.preferences.SharedPreferencesHandler;
 
 /**
  * Created by fargutuvictoria on 23/02/2018.
@@ -13,20 +14,17 @@ import com.fargutuvictoria.unibook.network.interactor.session.validation.Session
 public class SplashPresenter implements SplashContract.Presenter, SessionValidationInteractor.Callback {
 
     private SplashContract.View mView;
-    private SharedPreferencesHandler mSPreferenceHandler;
-    private SessionValidationInteractor sessionValidationInteractor;
 
 
-    public SplashPresenter(SharedPreferencesHandler sharedPreferencesHandler, SplashContract.View startContractView, SessionValidationInteractor sessionValidationInteractor) {
+    public SplashPresenter(SplashContract.View startContractView) {
         this.mView = startContractView;
-        this.mSPreferenceHandler = sharedPreferencesHandler;
-        this.sessionValidationInteractor = sessionValidationInteractor;
+
     }
 
     @Override
     public boolean doSessionValidation() {
-        if (mSPreferenceHandler.getSessionToken() != null) {
-            sessionValidationInteractor.initiate(this);
+        if (SharedPreferencesHandler.getInstance().getSessionToken() != null) {
+            new SessionValidationInteractorImpl().initiate(this);
             return true;
         }
         return false;

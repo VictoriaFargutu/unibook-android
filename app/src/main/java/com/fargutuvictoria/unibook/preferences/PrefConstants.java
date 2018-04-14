@@ -1,4 +1,4 @@
-package com.fargutuvictoria.commons.preferences;
+package com.fargutuvictoria.unibook.preferences;
 
 /**
  * Created by Mihai on 2/19/2018.

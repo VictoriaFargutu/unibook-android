@@ -1,27 +1,20 @@
-package com.fargutuvictoria.unibook.network.interactor.login;
-
-import android.util.Base64;
+package com.fargutuvictoria.unibook.network.interactor.session.validation;
 
 import com.fargutuvictoria.api.retrofit.ApiClient;
 import com.fargutuvictoria.api.retrofit.callback.HandledCallback;
 import com.fargutuvictoria.api.retrofit.service.AuthService;
-import com.fargutuvictoria.commons.model.AuthSession;
 import com.fargutuvictoria.commons.model.ExceptionInfo;
+import com.fargutuvictoria.commons.model.User;
 import com.fargutuvictoria.unibook.network.interactor.executor.InteractorExecutor;
 import com.fargutuvictoria.unibook.network.interactor.executor.MainThread;
 
 import retrofit2.Call;
 
-public class LoginInteractorImpl implements LoginInteractor {
-
-    private String username;
-    private String password;
-    private Callback callback;
+public class SessionValidationInteractorImpl implements SessionValidationInteractor {
+    private SessionValidationInteractor.Callback callback;
 
     @Override
-    public void initiate(String username, String password, Callback callback) {
-        this.username = username;
-        this.password = password;
+    public void initiate(Callback callback) {
         this.callback = callback;
         InteractorExecutor.getInstance().run(this);
     }
@@ -29,29 +22,26 @@ public class LoginInteractorImpl implements LoginInteractor {
     @Override
     public void interact() {
         AuthService authService = ApiClient.getInstance().getRetrofit().create(AuthService.class);
-        String credentials = username + ":" + password;
-        String base64 = Base64.encodeToString(credentials.getBytes(), Base64.DEFAULT);
-        String auth = "Basic " + base64.replaceAll("\n", "");
-        Call<AuthSession> call = authService.login(auth);
+        Call<User> call = authService.validateToken();
 
-        call.enqueue(new HandledCallback<AuthSession>() {
+        call.enqueue(new HandledCallback<User>() {
             @Override
-            public void onSuccess(AuthSession response) {
+            public void onSuccess(User response) {
                 notifySuccess(response);
             }
 
             @Override
-            public void onError(ExceptionInfo error) {
-                notifyFailure(error);
+            public void onError(ExceptionInfo exceptionInfo) {
+                notifyFailure(exceptionInfo);
             }
         });
     }
 
-    private void notifySuccess(final AuthSession session) {
+    private void notifySuccess(final User user) {
         MainThread.getInstance().post(new Runnable() {
             @Override
             public void run() {
-                callback.onLoginSuccess(session);
+                callback.onSessionValidationSuccess(user);
             }
         });
     }
@@ -60,7 +50,7 @@ public class LoginInteractorImpl implements LoginInteractor {
         MainThread.getInstance().post(new Runnable() {
             @Override
             public void run() {
-                callback.onLoginError(reason);
+                callback.onSessionValidationError(reason);
             }
         });
     }

@@ -1,6 +1,6 @@
 package com.fargutuvictoria.unibook.network.interceptor;
 
-import com.fargutuvictoria.commons.preferences.SharedPreferencesHandler;
+import com.fargutuvictoria.unibook.preferences.SharedPreferencesHandler;
 
 import java.io.IOException;
 
@@ -10,14 +10,9 @@ import okhttp3.Response;
 
 public class HeaderInterceptor implements Interceptor {
 
-    private SharedPreferencesHandler mPreferencesHandler;
-
-    public HeaderInterceptor(SharedPreferencesHandler mPreferencesHandler) {
-        this.mPreferencesHandler = mPreferencesHandler;
-    }
-
     @Override
     public Response intercept(Chain chain) throws IOException {
+        SharedPreferencesHandler mPreferencesHandler = SharedPreferencesHandler.getInstance();
         Request request = chain.request();
         if (mPreferencesHandler.getSessionToken() != null) {
             request = request.newBuilder()
