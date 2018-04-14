@@ -15,6 +15,4 @@ public interface AuthService {
 
     @GET("/auth/validation")
     Call<User> validateToken();
-
-
 }

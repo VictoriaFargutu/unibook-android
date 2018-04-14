@@ -2,7 +2,7 @@ package com.fargutuvictoria.unibook.network.interactor.login;
 
 import android.util.Base64;
 
-import com.fargutuvictoria.api.retrofit.ApiClient;
+import com.fargutuvictoria.unibook.ApiClient;
 import com.fargutuvictoria.api.retrofit.callback.HandledCallback;
 import com.fargutuvictoria.api.retrofit.service.AuthService;
 import com.fargutuvictoria.commons.model.AuthSession;

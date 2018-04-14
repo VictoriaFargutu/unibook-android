@@ -1,10 +1,10 @@
 package com.fargutuvictoria.unibook.network.interactor.session.validation;
 
-import com.fargutuvictoria.api.retrofit.ApiClient;
 import com.fargutuvictoria.api.retrofit.callback.HandledCallback;
 import com.fargutuvictoria.api.retrofit.service.AuthService;
 import com.fargutuvictoria.commons.model.ExceptionInfo;
 import com.fargutuvictoria.commons.model.User;
+import com.fargutuvictoria.unibook.ApiClient;
 import com.fargutuvictoria.unibook.network.interactor.executor.InteractorExecutor;
 import com.fargutuvictoria.unibook.network.interactor.executor.MainThread;
 

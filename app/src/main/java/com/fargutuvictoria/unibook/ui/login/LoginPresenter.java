@@ -8,6 +8,7 @@ import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.auth.UserSession;
 import com.fargutuvictoria.unibook.network.interactor.login.LoginInteractor;
 import com.fargutuvictoria.unibook.network.interactor.login.LoginInteractorImpl;
+import com.fargutuvictoria.unibook.preferences.SharedPreferencesHandler;
 
 public class LoginPresenter implements LoginContract.Presenter, LoginInteractor.Callback {
 
@@ -24,7 +25,7 @@ public class LoginPresenter implements LoginContract.Presenter, LoginInteractor.
 
     @Override
     public void onLoginSuccess(AuthSession authSession) {
-       // SharedPreferencesHandler..saveSessionToken(authSession.getSessionToken());
+        SharedPreferencesHandler.getInstance().saveSessionToken(authSession.getSessionToken());
         UserSession.getInstance().setLoggedInUser(authSession.getUser());
         mView.goToNextActivity();
     }

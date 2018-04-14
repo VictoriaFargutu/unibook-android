@@ -12,8 +12,8 @@ public class HeaderInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        SharedPreferencesHandler mPreferencesHandler = SharedPreferencesHandler.getInstance();
         Request request = chain.request();
+        SharedPreferencesHandler mPreferencesHandler = SharedPreferencesHandler.getInstance();
         if (mPreferencesHandler.getSessionToken() != null) {
             request = request.newBuilder()
                     .addHeader("X-Auth-Token", mPreferencesHandler.getSessionToken())

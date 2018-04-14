@@ -1,4 +1,6 @@
-package com.fargutuvictoria.api.retrofit;
+package com.fargutuvictoria.unibook;
+
+import com.fargutuvictoria.unibook.network.interceptor.HeaderInterceptor;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -19,6 +21,7 @@ public class ApiClient {
                     .client(new OkHttpClient.Builder()
                             .addNetworkInterceptor(new HttpLoggingInterceptor()
                                     .setLevel(HttpLoggingInterceptor.Level.BODY))
+                            .addInterceptor(new HeaderInterceptor())
                             .build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
