@@ -6,7 +6,9 @@
     <string name="logo">This is Logo</string>
     <string name="register">Create new account</string>
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="tab_home_course_room">Course Room</string>
-    <string name="tab_home_sem_room">Seminar Room</string>
-    <string name="tab_home_lab_room">Lab Room</string>
+    <string name="tab_home_course_room">Course Rooms</string>
+    <string name="tab_home_sem_room">Seminar Rooms</string>
+    <string name="tab_home_lab_room">Laboratory Rooms</string>
+    <string name="capacity">Capacity</string>
+    <string name="projector">Projector</string>
 </resources>
