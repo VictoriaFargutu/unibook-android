@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.fargutuvictoria.commons.Constants;
 import com.fargutuvictoria.commons.model.Classroom;
@@ -17,11 +18,10 @@ import com.fargutuvictoria.unibook.ui.home.adapter.HomeFragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 public class HomeActivity extends AppCompatActivity implements HomeContract.View {
-    @Inject
-    HomeContract.Presenter presenter;
+
+    //private HomeContract.Presenter presenter = new HomePresenter();
+    private HomePresenter homePresenter;
     private RecyclerView classroomsRecycler;
     private RecyclerView.Adapter recylerAdapter;
 
@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        android.support.v7.widget.Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         setContentView(R.layout.activity_home);
 
@@ -46,6 +46,8 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.home_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        homePresenter = new HomePresenter(this);
+        homePresenter.loadClassrooms();
     }
 
     public void broadcastIntent(List<Classroom> classrooms) {
@@ -58,9 +60,9 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     @Override
     public void showClassroomsLoaded(List<Classroom> classrooms) {
         classroomsRecycler = findViewById(R.id.courses_recycler_view);
-        recylerAdapter = new ClassroomListViewAdapter(classrooms, presenter);
+        recylerAdapter = new ClassroomListViewAdapter(classrooms, homePresenter);
         classroomsRecycler.setAdapter(recylerAdapter);
         classroomsRecycler.setLayoutManager(new LinearLayoutManager(this));
-        broadcastIntent(classrooms);
+//        broadcastIntent(classrooms);
     }
 }

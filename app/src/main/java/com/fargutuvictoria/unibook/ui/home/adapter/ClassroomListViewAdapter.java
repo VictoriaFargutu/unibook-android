@@ -72,7 +72,14 @@ public class ClassroomListViewAdapter extends RecyclerView.Adapter<ClassroomList
         }
 
         private void bind(Classroom classroom) {
-//            classroomName.setText(classroom.getName());
+            classroomName.setText(classroom.getName());
+            classroomCapacityNr.setText("" + classroom.getCapacity());
+            if (classroom.isHasProjector()) {
+                classroomHasProjector.setText(R.string.yes);
+            } else {
+                classroomHasProjector.setText(R.string.no);
+            }
+
             this.classroom = classroom;
         }
     }

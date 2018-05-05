@@ -11,4 +11,6 @@
     <string name="tab_home_lab_room">Laboratory Rooms</string>
     <string name="capacity">Capacity</string>
     <string name="projector">Projector</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
