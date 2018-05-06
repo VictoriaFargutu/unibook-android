@@ -21,7 +21,7 @@ public class CourseRoomFragment extends android.support.v4.app.Fragment implemen
 
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_course_rooms_list, container, false);
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
     @Override

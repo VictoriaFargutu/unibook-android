@@ -4,7 +4,7 @@
     <color name="colorPrimary">#003c7e</color>
     <color name="colorPrimaryDark">#003166</color>
     <color name="colorAccent">#007bd2</color>
-    <color name="hintText">#aa000000</color>
+    <color name="hintText">#96000000</color>
     <color name="bgTint">#1565C0</color>
     <color name="primaryTextColor">#1565C0</color>
     <color name="secondaryTextColor">#fff</color>
