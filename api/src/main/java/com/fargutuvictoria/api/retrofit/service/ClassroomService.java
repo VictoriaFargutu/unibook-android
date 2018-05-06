@@ -15,4 +15,10 @@ public interface ClassroomService {
     @GET("/classrooms/course")
     Call<List<Classroom>> getAllCourseClassrooms();
 
+    @GET("/classrooms/lab")
+    Call<List<Classroom>> getAllLabClassrooms();
+
+    @GET("/classrooms/seminar")
+    Call<List<Classroom>> getAllSeminarClassrooms();
+
 }

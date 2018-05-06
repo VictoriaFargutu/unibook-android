@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.commons.TabConstants;
-import com.fargutuvictoria.unibook.ui.home.classroom.CourseRoomFragment;
-import com.fargutuvictoria.unibook.ui.home.classroom.LabRoomFragment;
-import com.fargutuvictoria.unibook.ui.home.classroom.SeminarRoomFragment;
+import com.fargutuvictoria.unibook.ui.home.classroom.course.CourseRoomFragment;
+import com.fargutuvictoria.unibook.ui.home.classroom.lab.LabRoomFragment;
+import com.fargutuvictoria.unibook.ui.home.classroom.seminar.SeminarRoomFragment;
 
 public class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
 

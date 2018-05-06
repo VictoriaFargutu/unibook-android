@@ -11,7 +11,7 @@ public interface HomeContract {
         void showClassroomsLoaded(List<Classroom> classrooms);
     }
 
-    interface Presenter extends ActionHandler{
+    interface Presenter extends ActionHandler {
         void loadClassrooms();
     }
 }

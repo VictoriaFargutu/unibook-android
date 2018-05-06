@@ -6,15 +6,11 @@ import com.fargutuvictoria.unibook.network.interactor.Interactor;
 
 import java.util.List;
 
-/**
- * Created by fargutuvictoria on 05/05/2018.
- */
-
-public interface ClassroomInteractor extends Interactor {
+public interface SeminarRoomInteractor extends Interactor {
     interface Callback {
-        void onLoadClassroomsSuccess(List<Classroom> classrooms);
+        void onLoadSeminarRoomsSuccess(List<Classroom> seminarRooms);
 
-        void onLoadClassroomsEror(ExceptionInfo exceptionInfo);
+        void onLoadSeminarRoomsError(ExceptionInfo exceptionInfo);
     }
 
     void initiate(Callback callback);

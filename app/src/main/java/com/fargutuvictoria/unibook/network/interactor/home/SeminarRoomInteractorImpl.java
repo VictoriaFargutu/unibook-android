@@ -12,11 +12,7 @@ import java.util.List;
 
 import retrofit2.Call;
 
-/**
- * Created by fargutuvictoria on 05/05/2018.
- */
-
-public class ClassroomInteractorImpl implements ClassroomInteractor {
+public class SeminarRoomInteractorImpl implements SeminarRoomInteractor {
     private Callback callback;
 
     @Override
@@ -28,7 +24,7 @@ public class ClassroomInteractorImpl implements ClassroomInteractor {
     @Override
     public void interact() {
         ClassroomService classroomService = ApiClient.getInstance().getRetrofit().create(ClassroomService.class);
-        Call<List<Classroom>> call = classroomService.getAllCourseClassrooms();
+        Call<List<Classroom>> call = classroomService.getAllSeminarClassrooms();
 
         call.enqueue(new HandledCallback<List<Classroom>>() {
             @Override
@@ -47,7 +43,7 @@ public class ClassroomInteractorImpl implements ClassroomInteractor {
         MainThread.getInstance().post(new Runnable() {
             @Override
             public void run() {
-                callback.onLoadClassroomsSuccess(classrooms);
+                callback.onLoadSeminarRoomsSuccess(classrooms);
             }
         });
     }
@@ -56,7 +52,7 @@ public class ClassroomInteractorImpl implements ClassroomInteractor {
         MainThread.getInstance().post(new Runnable() {
             @Override
             public void run() {
-                callback.onLoadClassroomsEror(reason);
+                callback.onLoadSeminarRoomsError(reason);
             }
         });
     }
