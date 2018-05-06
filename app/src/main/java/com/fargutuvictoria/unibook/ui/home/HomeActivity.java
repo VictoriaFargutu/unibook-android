@@ -12,7 +12,6 @@ import com.fargutuvictoria.unibook.ui.home.adapter.HomeFragmentPagerAdapter;
 public class HomeActivity extends AppCompatActivity {
     private TabLayout tabLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,4 +33,5 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.home_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
+
 }

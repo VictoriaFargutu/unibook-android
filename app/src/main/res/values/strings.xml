@@ -13,4 +13,6 @@
     <string name="projector">Projector</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="myReservations">My Reservations</string>
+    <string name="makeReservation">Make Reservation</string>
 </resources>

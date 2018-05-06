@@ -2,7 +2,7 @@ package com.fargutuvictoria.unibook.ui.home.classroom.seminar;
 
 
 import com.fargutuvictoria.commons.model.Classroom;
-import com.fargutuvictoria.unibook.ui.home.adapter.ActionHandler;
+import com.fargutuvictoria.unibook.ui.home.adapter.classroom.ActionHandler;
 
 import java.util.List;
 

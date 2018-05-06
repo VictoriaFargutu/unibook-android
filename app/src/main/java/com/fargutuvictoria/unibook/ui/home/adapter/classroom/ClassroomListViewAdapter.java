@@ -1,4 +1,4 @@
-package com.fargutuvictoria.unibook.ui.home.adapter;
+package com.fargutuvictoria.unibook.ui.home.adapter.classroom;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

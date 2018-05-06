@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
-import com.fargutuvictoria.unibook.ui.home.adapter.ClassroomListViewAdapter;
+import com.fargutuvictoria.unibook.ui.home.adapter.classroom.ClassroomListViewAdapter;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class SeminarRoomFragment extends Fragment implements SeminarRoomContract
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         seminarRoomPresenter = new SeminarRoomPresenter(this);
-        classroomsRecycler = view.findViewById(R.id.courses_recycler_view);
+        classroomsRecycler = view.findViewById(R.id.recycler_view);
         seminarRoomPresenter.loadSeminarRooms();
     }
 

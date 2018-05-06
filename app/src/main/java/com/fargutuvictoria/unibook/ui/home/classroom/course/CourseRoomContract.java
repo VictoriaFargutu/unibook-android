@@ -1,17 +1,15 @@
 package com.fargutuvictoria.unibook.ui.home.classroom.course;
 
 import com.fargutuvictoria.commons.model.Classroom;
-import com.fargutuvictoria.unibook.ui.home.adapter.ActionHandler;
+import com.fargutuvictoria.unibook.ui.home.adapter.classroom.ActionHandler;
 
 import java.util.List;
-
-/**
- * Created by fargutuvictoria on 06/05/2018.
- */
 
 public interface CourseRoomContract {
     interface Fragment {
         void showCourseRoomsLoaded(List<Classroom> classrooms);
+
+        void openReservationActivity();
     }
 
     interface Presenter extends ActionHandler {
