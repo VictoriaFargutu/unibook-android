@@ -2,6 +2,7 @@ package com.fargutuvictoria.unibook.network.interactor.session.validation;
 
 import com.fargutuvictoria.api.retrofit.callback.HandledCallback;
 import com.fargutuvictoria.api.retrofit.service.AuthService;
+import com.fargutuvictoria.commons.model.AuthSession;
 import com.fargutuvictoria.commons.model.ExceptionInfo;
 import com.fargutuvictoria.commons.model.User;
 import com.fargutuvictoria.unibook.ApiClient;
@@ -22,11 +23,11 @@ public class SessionValidationInteractorImpl implements SessionValidationInterac
     @Override
     public void interact() {
         AuthService authService = ApiClient.getInstance().getRetrofit().create(AuthService.class);
-        Call<User> call = authService.validateToken();
+        Call<AuthSession> call = authService.validateToken();
 
-        call.enqueue(new HandledCallback<User>() {
+        call.enqueue(new HandledCallback<AuthSession>() {
             @Override
-            public void onSuccess(User response) {
+            public void onSuccess(AuthSession response) {
                 notifySuccess(response);
             }
 
@@ -37,11 +38,11 @@ public class SessionValidationInteractorImpl implements SessionValidationInterac
         });
     }
 
-    private void notifySuccess(final User user) {
+    private void notifySuccess(final AuthSession authSession) {
         MainThread.getInstance().post(new Runnable() {
             @Override
             public void run() {
-                callback.onSessionValidationSuccess(user);
+                callback.onSessionValidationSuccess(authSession);
             }
         });
     }

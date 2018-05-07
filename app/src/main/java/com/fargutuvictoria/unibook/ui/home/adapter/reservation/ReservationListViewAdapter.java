@@ -37,7 +37,7 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
     }
 
     public class ReservationViewHolder extends RecyclerView.ViewHolder {
-        private final TextView reservationClassroom;
+      //  private final TextView reservationClassroom;
         private final TextView reservationDate;
         //        private final TextView reservationDay;
 //        private final TextView reservationCourse;
@@ -47,7 +47,7 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
 
         public ReservationViewHolder(View itemView) {
             super(itemView);
-            reservationClassroom = itemView.findViewById(R.id.reservation_classroom);
+          //  reservationClassroom = itemView.findViewById(R.id.reservation_classroom);
             reservationDate = itemView.findViewById(R.id.reservation_date);
 //            reservationDay = itemView.findViewById(R.id.reservation_day);
 //            reservationCourse = itemView.findViewById(R.id.reservation_course);
@@ -55,7 +55,7 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
         }
 
         private void bind(Reservation reservation) {
-            reservationClassroom.setText(reservation.getClassroom());
+         //   reservationClassroom.setText(reservation.getClassroom().getName());
             reservationDate.setText("" + reservation.getDate());
 
             this.reservation = reservation;

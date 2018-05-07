@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.commons.TabConstants;
+import com.fargutuvictoria.unibook.ui.reservation.make.MakeReservationFragment;
 import com.fargutuvictoria.unibook.ui.reservation.show.MyReservationsFragment;
 
 public class ReservationFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -24,8 +25,7 @@ public class ReservationFragmentPagerAdapter extends FragmentPagerAdapter {
         if (position == TabConstants.MY_RESERVATIONS_TAB_POSITION) {
             return new MyReservationsFragment();
         } else {
-            //return new LabRoomFragment();
-            return null;
+            return new MakeReservationFragment();
         }
     }
 

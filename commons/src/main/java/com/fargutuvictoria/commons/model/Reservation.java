@@ -8,13 +8,12 @@ import java.util.Date;
 
 public class Reservation {
     private Long id;
-    private User user;
-    private String studentsGroup;
-    private String classroom;
-    private String course;
+    private StudentsGroup studentsGroup;
+    private Classroom classroom;
+    private Course course;
     private String weekType;
     private String day;
-    private Date date;
+    private String date;
     private String hour;
 
     public Long getId() {
@@ -25,35 +24,27 @@ public class Reservation {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getStudentsGroup() {
+    public StudentsGroup getStudentsGroup() {
         return studentsGroup;
     }
 
-    public void setStudentsGroup(String studentsGroup) {
+    public void setStudentsGroup(StudentsGroup studentsGroup) {
         this.studentsGroup = studentsGroup;
     }
 
-    public String getClassroom() {
+    public Classroom getClassroom() {
         return classroom;
     }
 
-    public void setClassroom(String classroom) {
+    public void setClassroom(Classroom classroom) {
         this.classroom = classroom;
     }
 
-    public String getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(String course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
@@ -73,11 +64,11 @@ public class Reservation {
         this.day = day;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -6,8 +6,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.fargutuvictoria.commons.DateDeserializer;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationFragmentPagerAdapter;
+import com.google.gson.GsonBuilder;
+
+import java.util.Date;
 
 public class ReservationActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -19,6 +23,9 @@ public class ReservationActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.reservations_toolbar);
         setSupportActionBar(myToolbar);
         setContentView(R.layout.activity_reservation);
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Date.class, new DateDeserializer());
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = findViewById(R.id.reservations_view_pager);

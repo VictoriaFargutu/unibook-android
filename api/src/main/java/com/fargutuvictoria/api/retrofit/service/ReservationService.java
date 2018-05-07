@@ -11,5 +11,5 @@ import retrofit2.http.Query;
 
 public interface ReservationService {
     @GET("/reservations")
-    Call<List<Reservation>> getReservationsByUserId(@Query("userId") Long userId);
+    Call<List<Reservation>> getReservationsByUserId(@Query("id") Long id);
 }

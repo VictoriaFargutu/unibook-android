@@ -14,5 +14,5 @@ public interface AuthService {
     Call<AuthSession> login(@Header("Authorization") String auth);
 
     @GET("/auth/validation")
-    Call<User> validateToken();
+    Call<AuthSession> validateToken();
 }

@@ -1,7 +1,7 @@
 package com.fargutuvictoria.unibook.ui.splash;
 
+import com.fargutuvictoria.commons.model.AuthSession;
 import com.fargutuvictoria.commons.model.ExceptionInfo;
-import com.fargutuvictoria.commons.model.User;
 import com.fargutuvictoria.unibook.auth.UserSession;
 import com.fargutuvictoria.unibook.network.interactor.session.validation.SessionValidationInteractor;
 import com.fargutuvictoria.unibook.network.interactor.session.validation.SessionValidationInteractorImpl;
@@ -31,8 +31,8 @@ public class SplashPresenter implements SplashContract.Presenter, SessionValidat
     }
 
     @Override
-    public void onSessionValidationSuccess(User user) {
-        UserSession.getInstance().setLoggedInUser(user);
+    public void onSessionValidationSuccess(AuthSession authSession) {
+        UserSession.getInstance().setLoggedInUser(authSession.getUser());
         mView.goToHomeActivity();
     }
 
