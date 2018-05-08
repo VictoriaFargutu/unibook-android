@@ -13,7 +13,7 @@ public class Reservation {
     private Course course;
     private String weekType;
     private String day;
-    private String date;
+    private Date date;
     private String hour;
 
     public Long getId() {
@@ -64,11 +64,11 @@ public class Reservation {
         this.day = day;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

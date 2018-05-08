@@ -3,13 +3,16 @@ package com.fargutuvictoria.unibook.network.interactor.reservation;
 
 import com.fargutuvictoria.api.retrofit.callback.HandledCallback;
 import com.fargutuvictoria.api.retrofit.service.ReservationService;
+import com.fargutuvictoria.commons.DateDeserializer;
 import com.fargutuvictoria.commons.model.ExceptionInfo;
 import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.ApiClient;
 import com.fargutuvictoria.unibook.auth.UserSession;
 import com.fargutuvictoria.unibook.network.interactor.executor.InteractorExecutor;
 import com.fargutuvictoria.unibook.network.interactor.executor.MainThread;
+import com.google.gson.GsonBuilder;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;

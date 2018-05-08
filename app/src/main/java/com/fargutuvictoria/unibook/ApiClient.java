@@ -1,6 +1,11 @@
 package com.fargutuvictoria.unibook;
 
+import com.fargutuvictoria.commons.DateDeserializer;
 import com.fargutuvictoria.unibook.network.interceptor.HeaderInterceptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.Date;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -23,7 +28,7 @@ public class ApiClient {
                                     .setLevel(HttpLoggingInterceptor.Level.BODY))
                             .addInterceptor(new HeaderInterceptor())
                             .build())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).create()))
                     .build();
         }
         return INSTANCE;

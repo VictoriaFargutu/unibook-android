@@ -8,4 +8,5 @@
     <color name="bgTint">#1565C0</color>
     <color name="primaryTextColor">#1565C0</color>
     <color name="secondaryTextColor">#fff</color>
+    <color name="freeToReserveBackgroundItem">#6c0e5bb1</color>
 </resources>

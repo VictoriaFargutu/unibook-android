@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface MakeReservationContract {
     interface Fragment {
-        //void showReservationsLoaded(List<Reservation> reservations);
+        void showOptionsLoaded(List<Reservation> reservations);
     }
 
     interface Presenter {
-       // void loadReservations();
+        void loadFreeOptions();
     }
 }

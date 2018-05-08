@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.fargutuvictoria.commons.DateDeserializer;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationFragmentPagerAdapter;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.Date;
@@ -24,8 +25,13 @@ public class ReservationActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         setContentView(R.layout.activity_reservation);
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Date.class, new DateDeserializer());
+//        GsonBuilder gsonBuilder = new GsonBuilder();
+//        gsonBuilder.registerTypeAdapter(Date.class, new DateDeserializer());
+
+//        Gson gson = new GsonBuilder()
+//                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+//                .create();
+
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = findViewById(R.id.reservations_view_pager);

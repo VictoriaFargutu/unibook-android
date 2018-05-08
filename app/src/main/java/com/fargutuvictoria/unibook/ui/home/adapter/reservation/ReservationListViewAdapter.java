@@ -1,6 +1,5 @@
 package com.fargutuvictoria.unibook.ui.home.adapter.reservation;
 
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,13 @@ import android.widget.TextView;
 import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Logger;
 
 public class ReservationListViewAdapter extends RecyclerView.Adapter<ReservationListViewAdapter.ReservationViewHolder> {
     private List<Reservation> reservations;
@@ -56,6 +61,15 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
 
         private void bind(Reservation reservation) {
          //   reservationClassroom.setText(reservation.getClassroom().getName());
+//            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+//            Date date = null;
+//            try {
+//                date = format.parse(reservation.getDate());
+//                System.out.println(date);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+            // Sat Jan 02 00:00:00 GMT 2010
             reservationDate.setText("" + reservation.getDate());
 
             this.reservation = reservation;

@@ -22,10 +22,10 @@ public class ReservationFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        if (position == TabConstants.MY_RESERVATIONS_TAB_POSITION) {
-            return new MyReservationsFragment();
-        } else {
+        if (position == TabConstants.MAKE_RESERVATION_TAB_POSITION) {
             return new MakeReservationFragment();
+        } else {
+            return new MyReservationsFragment();
         }
     }
 
@@ -38,10 +38,10 @@ public class ReservationFragmentPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
 
         switch (position) {
-            case TabConstants.MY_RESERVATIONS_TAB_POSITION:
-                return context.getString(R.string.myReservations);
             case TabConstants.MAKE_RESERVATION_TAB_POSITION:
                 return context.getString(R.string.makeReservation);
+            case TabConstants.MY_RESERVATIONS_TAB_POSITION:
+                return context.getString(R.string.myReservations);
             default:
                 return null;
         }
