@@ -17,4 +17,6 @@
     <string name="makeReservation">Make Reservation</string>
     <string name="cancel_reservation">Cancel Reservation</string>
     <string name="apply">Apply</string>
+    <string name="filters">Filters</string>
+    <string name="reset">Reset</string>
 </resources>

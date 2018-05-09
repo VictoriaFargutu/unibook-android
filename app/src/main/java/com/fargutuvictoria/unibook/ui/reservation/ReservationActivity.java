@@ -7,8 +7,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.fargutuvictoria.unibook.R;
+import com.fargutuvictoria.unibook.ui.filter.ReservationFilterActivity;
 import com.fargutuvictoria.unibook.ui.home.HomeActivity;
 import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationFragmentPagerAdapter;
 
@@ -36,6 +39,15 @@ public class ReservationActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         tabLayout = findViewById(R.id.reservations_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        Button filter_button = findViewById(R.id.filters_button);
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReservationFilterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
