@@ -17,9 +17,10 @@
                 android:id="@+id/carwash_logo"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
+                android:layout_marginTop="10dp"
                 android:paddingEnd="5dp"
                 android:paddingStart="5dp"
-                android:paddingTop="15dp"
+                android:paddingTop="5dp"
                 android:src="@drawable/ic_event_black_48dp" />
 
         </LinearLayout>
@@ -58,38 +59,73 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/reservation_quick_date"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date"
-                android:textSize="12sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reservation_quick_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingEnd="3dp"
+                    android:text="Date"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/reservation_quick_hour"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingEnd="3dp"
+                    android:text="Hour"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/reservation_day"
+                android:id="@+id/reservation_quick_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Day"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/reservation_hour"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hour"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/reservation_course"
+                android:id="@+id/reservation_quick_course"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Course" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reservation_quick_students_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingEnd="3dp"
+                    android:text="Students Group"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/reservation_quick_students_year"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:paddingEnd="3dp"
+                    android:text="Year: "
+                    android:textSize="12sp" />
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/quick_cancel_reservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

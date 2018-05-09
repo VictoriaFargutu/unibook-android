@@ -8,6 +8,8 @@ import java.util.List;
 public interface MyReservationsContract {
     interface Fragment {
         void showReservationsLoaded(List<Reservation> reservations);
+
+        void openReservationQuickView(Reservation reservation);
     }
 
     interface Presenter {

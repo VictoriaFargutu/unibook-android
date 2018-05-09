@@ -8,20 +8,18 @@ import android.widget.TextView;
 
 import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.R;
+import com.fargutuvictoria.unibook.ui.reservation.show.MyReservationsContract;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.logging.Logger;
 
 public class ReservationListViewAdapter extends RecyclerView.Adapter<ReservationListViewAdapter.ReservationViewHolder> {
     private List<Reservation> reservations;
+    private MyReservationsContract.Fragment fragment;
 
-    public ReservationListViewAdapter(List<Reservation> reservations) {
+    public ReservationListViewAdapter(List<Reservation> reservations, MyReservationsContract.Fragment fragment) {
         this.reservations = reservations;
+        this.fragment = fragment;
     }
 
     @Override
@@ -42,35 +40,32 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
     }
 
     public class ReservationViewHolder extends RecyclerView.ViewHolder {
-      //  private final TextView reservationClassroom;
         private final TextView reservationDate;
-        //        private final TextView reservationDay;
-//        private final TextView reservationCourse;
-//        private final TextView reservationHour;
-//        private final Button cancelReservationButton;
+        private final TextView reservationClassroom;
         private Reservation reservation;
 
         public ReservationViewHolder(View itemView) {
             super(itemView);
-          //  reservationClassroom = itemView.findViewById(R.id.reservation_classroom);
             reservationDate = itemView.findViewById(R.id.reservation_date);
-//            reservationDay = itemView.findViewById(R.id.reservation_day);
-//            reservationCourse = itemView.findViewById(R.id.reservation_course);
-//            reservationHour = itemView.findViewById(R.id.reservation_hour);
+            reservationClassroom = itemView.findViewById(R.id.reservation_classroom);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fragment.openReservationQuickView(reservation);
+                }
+            });
+
         }
 
         private void bind(Reservation reservation) {
-         //   reservationClassroom.setText(reservation.getClassroom().getName());
-//            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-//            Date date = null;
-//            try {
-//                date = format.parse(reservation.getDate());
-//                System.out.println(date);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-            // Sat Jan 02 00:00:00 GMT 2010
-            reservationDate.setText("" + reservation.getDate());
+            reservationClassroom.setText(reservation.getClassroom().getName());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(reservation.getDate());
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
+            String date = "" + day + " " + month + " " + year;
+            reservationDate.setText(date);
 
             this.reservation = reservation;
         }
