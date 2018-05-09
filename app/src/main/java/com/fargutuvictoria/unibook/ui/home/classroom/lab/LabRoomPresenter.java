@@ -19,7 +19,7 @@ public class LabRoomPresenter implements LabRoomContract.Presenter, LaboratoryRo
 
     @Override
     public void onArrowClick(Classroom classroom) {
-
+        fragment.openReservationActivity();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.fargutuvictoria.unibook.ui.home.classroom.lab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.ui.home.adapter.classroom.ClassroomListViewAdapter;
+import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 import java.util.List;
 
@@ -40,5 +42,11 @@ public class LabRoomFragment extends Fragment implements LabRoomContract.Fragmen
         RecyclerView.Adapter recylerAdapter = new ClassroomListViewAdapter(labRooms, labRoomPresenter);
         classroomsRecycler.setAdapter(recylerAdapter);
         classroomsRecycler.setLayoutManager(new LinearLayoutManager(UnibookApplication.getInstance()));
+    }
+
+    @Override
+    public void openReservationActivity() {
+        Intent intent = new Intent(this.getActivity(), ReservationActivity.class);
+        startActivity(intent);
     }
 }
