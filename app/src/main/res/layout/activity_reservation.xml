@@ -17,8 +17,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:navigationIcon="@drawable/ic_menu_black_24dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Reservations"
             app:titleTextColor="@color/white" />

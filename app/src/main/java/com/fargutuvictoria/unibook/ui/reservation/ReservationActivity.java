@@ -1,18 +1,16 @@
 package com.fargutuvictoria.unibook.ui.reservation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
-import com.fargutuvictoria.commons.DateDeserializer;
 import com.fargutuvictoria.unibook.R;
+import com.fargutuvictoria.unibook.ui.home.HomeActivity;
 import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationFragmentPagerAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.Date;
 
 public class ReservationActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -20,18 +18,11 @@ public class ReservationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Toolbar myToolbar = findViewById(R.id.reservations_toolbar);
-        setSupportActionBar(myToolbar);
         setContentView(R.layout.activity_reservation);
 
-//        GsonBuilder gsonBuilder = new GsonBuilder();
-//        gsonBuilder.registerTypeAdapter(Date.class, new DateDeserializer());
-
-//        Gson gson = new GsonBuilder()
-//                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-//                .create();
-
+        Toolbar toolbar = findViewById(R.id.reservations_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = findViewById(R.id.reservations_view_pager);
@@ -45,5 +36,17 @@ public class ReservationActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         tabLayout = findViewById(R.id.reservations_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
