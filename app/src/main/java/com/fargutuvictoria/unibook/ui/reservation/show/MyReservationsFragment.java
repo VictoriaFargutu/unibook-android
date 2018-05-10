@@ -46,16 +46,16 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
     @Override
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        reservationQuickView = view.findViewById(R.id.reservation_quick_view);
-        reservationQuickClassroom = view.findViewById(R.id.reservation_quick_classroom);
-        reservationQuickDay = view.findViewById(R.id.reservation_quick_day);
-        reservationQuickCourse = view.findViewById(R.id.reservation_quick_course);
-        reservationQuickHour = view.findViewById(R.id.reservation_quick_hour);
-        reservationQuickDate = view.findViewById(R.id.reservation_quick_date);
-        reservationQuickStudentsGroup = view.findViewById(R.id.reservation_quick_students_group);
-        reservationQuickStudentsYear = view.findViewById(R.id.reservation_quick_students_year);
-        cancelReservationButton = view.findViewById(R.id.quick_cancel_reservation);
-        closeQuickViewButton = view.findViewById(R.id.close_button);
+        reservationQuickView = getActivity().findViewById(R.id.reservation_quick_view);
+        reservationQuickClassroom = reservationQuickView.findViewById(R.id.reservation_quick_classroom);
+        reservationQuickDay = reservationQuickView.findViewById(R.id.reservation_quick_day);
+        reservationQuickCourse = reservationQuickView.findViewById(R.id.reservation_quick_course);
+        reservationQuickHour = reservationQuickView.findViewById(R.id.reservation_quick_hour);
+        reservationQuickDate = reservationQuickView.findViewById(R.id.reservation_quick_date);
+        reservationQuickStudentsGroup = reservationQuickView.findViewById(R.id.reservation_quick_students_group);
+        reservationQuickStudentsYear = reservationQuickView.findViewById(R.id.reservation_quick_students_year);
+        cancelReservationButton = reservationQuickView.findViewById(R.id.quick_cancel_reservation);
+        closeQuickViewButton = reservationQuickView.findViewById(R.id.close_button);
 
         myReservationsPresenter = new MyReservationsPresenter(this);
         reservationsRecycler = view.findViewById(R.id.recycler_view);

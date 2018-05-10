@@ -9,8 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.fargutuvictoria.unibook.R;
+import com.fargutuvictoria.unibook.commons.TabConstants;
 import com.fargutuvictoria.unibook.ui.filter.ReservationFilterActivity;
 import com.fargutuvictoria.unibook.ui.home.HomeActivity;
 import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationFragmentPagerAdapter;
@@ -39,13 +41,38 @@ public class ReservationActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         tabLayout = findViewById(R.id.reservations_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        //tabLayout.getTabAt(TabConstants.MAKE_RESERVATION_TAB_POSITION).select();
+        final Button filter_button = findViewById(R.id.filters_button);
+        final LinearLayout reservationQuickView = findViewById(R.id.reservation_quick_view);
 
-        Button filter_button = findViewById(R.id.filters_button);
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ReservationFilterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == TabConstants.MY_RESERVATIONS_TAB_POSITION) {
+                    filter_button.setVisibility(View.GONE);
+                }
+                if (tab.getPosition() == TabConstants.MAKE_RESERVATION_TAB_POSITION) {
+                    filter_button.setVisibility(View.VISIBLE);
+                    reservationQuickView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
     }

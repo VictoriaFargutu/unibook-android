@@ -12,12 +12,4 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <include
-        android:id="@+id/reservation_quick_view"
-        layout="@layout/reservation_quick_view_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone" />
-
 </RelativeLayout>

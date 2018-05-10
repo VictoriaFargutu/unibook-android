@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
-import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationListViewAdapter;
 import com.fargutuvictoria.unibook.ui.home.adapter.reservation.freeoptions.FreeOptionsCardViewAdapter;
 
 import java.util.List;

@@ -66,7 +66,16 @@
         android:drawableEnd="@drawable/ic_filter_list_black_24dp"
         android:paddingEnd="10dp"
         android:paddingStart="5dp"
-        android:textColor="@color/white"
-        android:text="@string/filters" />
+        android:text="@string/filters"
+        android:textColor="@color/white" />
+
+
+    <include
+        android:id="@+id/reservation_quick_view"
+        layout="@layout/reservation_quick_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
 
 </RelativeLayout>
