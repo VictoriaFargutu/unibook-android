@@ -7,18 +7,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.fargutuvictoria.commons.model.commons.ClassroomType;
+import com.fargutuvictoria.commons.model.commons.WeekType;
 import com.fargutuvictoria.unibook.R;
-import com.fargutuvictoria.unibook.ui.home.HomeActivity;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ReservationFilterActivity extends AppCompatActivity {
+public class ReservationFilterActivity extends AppCompatActivity implements ReservationFilterContract.View {
+    private Spinner classroomTypeSpinner;
+    private Spinner weekTypeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,12 @@ public class ReservationFilterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         final EditText dateEditText = findViewById(R.id.date_picker);
+        classroomTypeSpinner = findViewById(R.id.classroom_type_spinner);
+        weekTypeSpinner = findViewById(R.id.week_type_spinner);
+
+        showClassroomTypes();
+        showWeekTypes();
+
         final Calendar calendar = Calendar.getInstance();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -64,5 +76,43 @@ public class ReservationFilterActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void showClassroomTypes() {
+        ArrayAdapter<ClassroomType> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ClassroomType.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classroomTypeSpinner.setAdapter(adapter);
+        classroomTypeSpinner.setSelection(0, true);
+
+        classroomTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    @Override
+    public void showWeekTypes() {
+        ArrayAdapter<WeekType> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, WeekType.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        weekTypeSpinner.setAdapter(adapter);
+        weekTypeSpinner.setSelection(0, true);
+
+        weekTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 }
