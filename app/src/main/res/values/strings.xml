@@ -19,4 +19,5 @@
     <string name="apply">Apply</string>
     <string name="filters">Filters</string>
     <string name="reset">Reset</string>
+    <string name="choose_the_date">Choose the date...</string>
 </resources>

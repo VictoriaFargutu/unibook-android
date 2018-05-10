@@ -11,4 +11,5 @@
     <color name="freeToReserveBackgroundItem">#6c0e5bb1</color>
     <color name="quickViewBackgroundColor">#6c87bdf9</color>
     <color name="darkGray">#505050</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

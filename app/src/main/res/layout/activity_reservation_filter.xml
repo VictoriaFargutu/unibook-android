@@ -103,21 +103,54 @@
             android:background="@color/darkGray" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/date_picker"
+    <RelativeLayout
+        android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/week_type"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
         android:layout_marginTop="25dp"
-        android:inputType="none" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/date_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp" />
+
+            <EditText
+                android:id="@+id/date_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@color/transparent"
+                android:paddingTop="10dp"
+                android:clickable="true"
+                android:focusable="false"
+                android:inputType="date"
+                android:longClickable="false"
+                android:text="@string/choose_the_date" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/date_filter"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@color/darkGray" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/hour_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_picker"
+        android:layout_below="@id/date"
         android:layout_marginTop="25dp"
         android:orientation="vertical">
 
@@ -235,8 +268,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/filters_apply_button"
-        android:layout_alignEnd="@id/date_picker"
-        android:layout_alignStart="@+id/date_picker"
+        android:layout_alignEnd="@id/date"
+        android:layout_alignStart="@+id/date"
         android:layout_marginBottom="11dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/reset"
@@ -246,9 +279,9 @@
         android:id="@+id/filters_apply_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/date_picker"
+        android:layout_alignEnd="@id/date"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/date_picker"
+        android:layout_alignStart="@+id/date"
         android:layout_marginBottom="11dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/apply"

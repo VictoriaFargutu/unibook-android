@@ -51,4 +51,8 @@
 
     </LinearLayout>
 
+    <include
+        android:id="@+id/drawerr_layout"
+        layout="@layout/drawer_layout" />
+
 </LinearLayout>
