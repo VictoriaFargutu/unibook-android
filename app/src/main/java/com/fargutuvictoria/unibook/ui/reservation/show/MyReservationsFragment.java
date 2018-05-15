@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.R;
@@ -70,7 +69,7 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
     }
 
     @Override
-    public void openReservationQuickView(Reservation reservation) {
+    public void openReservationQuickView(final Reservation reservation) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(reservation.getDate());
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -89,7 +88,7 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         cancelReservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Under development! Cancel Reservation!", Toast.LENGTH_SHORT).show();
+                myReservationsPresenter.cancelReservation(reservation.getId());
             }
         });
 

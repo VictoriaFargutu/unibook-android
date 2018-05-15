@@ -14,5 +14,7 @@ public interface MyReservationsContract {
 
     interface Presenter {
         void loadReservations();
+
+        void cancelReservation(Long reservationId);
     }
 }

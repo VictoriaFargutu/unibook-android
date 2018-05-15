@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -25,6 +26,8 @@ import java.util.Locale;
 public class ReservationFilterActivity extends AppCompatActivity implements ReservationFilterContract.View {
     private Spinner classroomTypeSpinner;
     private Spinner weekTypeSpinner;
+    private Button resetButton;
+    private Button applyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         final EditText dateEditText = findViewById(R.id.date_picker);
         classroomTypeSpinner = findViewById(R.id.classroom_type_spinner);
         weekTypeSpinner = findViewById(R.id.week_type_spinner);
+        resetButton = findViewById(R.id.filters_reset_button);
+        applyButton = findViewById(R.id.filters_apply_button);
 
         showClassroomTypes();
         showWeekTypes();
@@ -62,6 +67,20 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                 new DatePickerDialog(ReservationFilterActivity.this, date, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
