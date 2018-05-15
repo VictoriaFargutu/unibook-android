@@ -1,18 +1,20 @@
 package com.fargutuvictoria.unibook.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.ui.home.adapter.HomeFragmentPagerAdapter;
+import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -27,23 +29,36 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        drawerLayout = findViewById(R.id.drawerr_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
 
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                // set item as selected to persist highlight
-//                item.setChecked(true);
-//                // close drawer when item is tapped
-//                drawerLayout.closeDrawers();
-//
-//                // Add code here to update the UI based on the item selected
-//                // For example, swap UI fragments here
-//
-//                return true;
-//            }
-//        });
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                //set item as selected to persist highlight
+                item.setChecked(true);
+                // close drawer when item is tapped
+                drawerLayout.closeDrawers();
+
+                // Add code here to update the UI based on the item selected
+                switch (item.getItemId()) {
+                    case R.id.reservation:
+                        Intent intent = new Intent(HomeActivity.this, ReservationActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.notification:
+                        return true;
+                    case R.id.profile:
+                        return true;
+                    case R.id.log_out:
+                        return true;
+                    default:
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                }
+                return true;
+            }
+        });
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = findViewById(R.id.home_view_pager);
@@ -67,12 +82,5 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
-        return true;
     }
 }
