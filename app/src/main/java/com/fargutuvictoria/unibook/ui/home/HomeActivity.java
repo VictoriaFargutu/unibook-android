@@ -16,7 +16,7 @@ import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.ui.home.adapter.HomeFragmentPagerAdapter;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TabLayout tabLayout;
     private DrawerLayout drawerLayout;
 
@@ -32,33 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //set item as selected to persist highlight
-                item.setChecked(true);
-                // close drawer when item is tapped
-                drawerLayout.closeDrawers();
-
-                // Add code here to update the UI based on the item selected
-                switch (item.getItemId()) {
-                    case R.id.reservation:
-                        Intent intent = new Intent(HomeActivity.this, ReservationActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case R.id.notification:
-                        return true;
-                    case R.id.profile:
-                        return true;
-                    case R.id.log_out:
-                        return true;
-                    default:
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                }
-                return true;
-            }
-        });
+        navigationView.setNavigationItemSelectedListener(this);
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = findViewById(R.id.home_view_pager);
@@ -82,5 +56,30 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //set item as selected to persist highlight
+        item.setChecked(true);
+        // close drawer when item is tapped
+        drawerLayout.closeDrawers();
+
+        // Add code here to update the UI based on the item selected
+        switch (item.getItemId()) {
+            case R.id.reservation:
+                Intent intent = new Intent(HomeActivity.this, ReservationActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.notification:
+                return true;
+            case R.id.profile:
+                return true;
+            case R.id.log_out:
+                return true;
+            default:
+                drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        return false;
     }
 }
