@@ -43,8 +43,9 @@ public class CourseRoomFragment extends Fragment implements CourseRoomContract.F
     }
 
     @Override
-    public void openReservationActivity() {
+    public void openReservationActivity(Classroom classroom) {
         Intent intent = new Intent(this.getActivity(), ReservationActivity.class);
+        intent.putExtra("classroom", classroom);
         startActivity(intent);
     }
 }

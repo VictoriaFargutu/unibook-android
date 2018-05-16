@@ -9,7 +9,7 @@ public interface CourseRoomContract {
     interface Fragment {
         void showCourseRoomsLoaded(List<Classroom> classrooms);
 
-        void openReservationActivity();
+        void openReservationActivity(Classroom classroom);
     }
 
     interface Presenter extends ActionHandler {

@@ -45,8 +45,9 @@ public class LabRoomFragment extends Fragment implements LabRoomContract.Fragmen
     }
 
     @Override
-    public void openReservationActivity() {
+    public void openReservationActivity(Classroom classroom) {
         Intent intent = new Intent(this.getActivity(), ReservationActivity.class);
+        intent.putExtra("classroom", classroom);
         startActivity(intent);
     }
 }

@@ -1,6 +1,7 @@
 package com.fargutuvictoria.unibook.ui.reservation.make;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.fargutuvictoria.commons.model.Reservation;
+import com.fargutuvictoria.commons.model.Classroom;
+import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.ui.home.adapter.reservation.freeoptions.FreeOptionsCardViewAdapter;
@@ -31,12 +33,14 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
         super.onViewCreated(view, savedInstanceState);
         makeReservationPresenter = new MakeReservationPresenter(this);
         recyclerView = view.findViewById(R.id.recycler_view);
-        makeReservationPresenter.loadFreeOptions();
+        Intent intent = getActivity().getIntent();
+        Classroom classroom = (Classroom) intent.getSerializableExtra("classroom");
+        makeReservationPresenter.loadFreeOptions(classroom);
     }
 
     @Override
-    public void showOptionsLoaded(List<Reservation> reservations) {
-        RecyclerView.Adapter recylerAdapter = new FreeOptionsCardViewAdapter(reservations);
+    public void showOptionsLoaded(List<FreeOption> freeOptions) {
+        RecyclerView.Adapter recylerAdapter = new FreeOptionsCardViewAdapter(freeOptions);
         recyclerView.setAdapter(recylerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(UnibookApplication.getInstance()));
     }

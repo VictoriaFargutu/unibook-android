@@ -1,10 +1,12 @@
 package com.fargutuvictoria.commons.model;
 
+import java.io.Serializable;
+
 /**
  * Created by fargutuvictoria on 05/05/2018.
  */
 
-public class Classroom {
+public class Classroom implements Serializable {
     private Long id;
     private String name;
     private String type;

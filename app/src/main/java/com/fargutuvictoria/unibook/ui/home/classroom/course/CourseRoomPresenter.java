@@ -19,7 +19,7 @@ public class CourseRoomPresenter implements CourseRoomContract.Presenter, Course
 
     @Override
     public void onArrowClick(Classroom classroom) {
-        fragment.openReservationActivity();
+        fragment.openReservationActivity(classroom);
     }
 
     @Override

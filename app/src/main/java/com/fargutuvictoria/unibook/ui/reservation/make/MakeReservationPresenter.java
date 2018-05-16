@@ -3,15 +3,16 @@ package com.fargutuvictoria.unibook.ui.reservation.make;
 
 import android.widget.Toast;
 
+import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.commons.model.ExceptionInfo;
-import com.fargutuvictoria.commons.model.Reservation;
+import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.UnibookApplication;
-import com.fargutuvictoria.unibook.network.interactor.reservation.GetMyReservationsInteractor;
-import com.fargutuvictoria.unibook.network.interactor.reservation.GetMyReservationsInteractorImpl;
+import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByClassroomInteractor;
+import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByClassroomInteractorImpl;
 
 import java.util.List;
 
-public class MakeReservationPresenter implements MakeReservationContract.Presenter, GetMyReservationsInteractor.Callback {
+public class MakeReservationPresenter implements MakeReservationContract.Presenter, GetFreeOptionsByClassroomInteractor.Callback {
     private MakeReservationContract.Fragment fragment;
 
     public MakeReservationPresenter(MakeReservationContract.Fragment fragment) {
@@ -19,18 +20,18 @@ public class MakeReservationPresenter implements MakeReservationContract.Present
     }
 
     @Override
-    public void loadFreeOptions() {
-        GetMyReservationsInteractor getMyReservationsInteractor = new GetMyReservationsInteractorImpl();
-        getMyReservationsInteractor.initiate(this);
+    public void loadFreeOptions(Classroom classroom) {
+        GetFreeOptionsByClassroomInteractor getFreeOptionsByClassroomInteractor = new GetFreeOptionsByClassroomInteractorImpl();
+        getFreeOptionsByClassroomInteractor.initiate(classroom, this);
     }
 
     @Override
-    public void onLoadReservationsSuccess(List<Reservation> reservations) {
-        fragment.showOptionsLoaded(reservations);
+    public void onGetFreeOptionsSuccess(List<FreeOption> freeOptionList) {
+        fragment.showOptionsLoaded(freeOptionList);
     }
 
     @Override
-    public void onLoadReservationsError(ExceptionInfo exceptionInfo) {
+    public void onGetFreeOptionsError(ExceptionInfo exceptionInfo) {
         Toast.makeText(UnibookApplication.getInstance(), exceptionInfo.getMessage(), Toast.LENGTH_LONG).show();
     }
 }

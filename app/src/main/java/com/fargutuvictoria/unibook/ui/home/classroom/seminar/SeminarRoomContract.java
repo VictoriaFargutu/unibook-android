@@ -9,7 +9,7 @@ import java.util.List;
 public interface SeminarRoomContract {
     interface Fragment {
         void showSeminarRoomsLoaded(List<Classroom> classrooms);
-        void openReservationActivity();
+        void openReservationActivity(Classroom classroom);
     }
 
     interface Presenter extends ActionHandler {

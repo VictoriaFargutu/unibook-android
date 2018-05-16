@@ -8,7 +8,7 @@ import java.util.List;
 public interface LabRoomContract {
     interface Fragment {
         void showLabRoomsLoaded(List<Classroom> classrooms);
-        void openReservationActivity();
+        void openReservationActivity(Classroom classroom);
     }
 
     interface Presenter extends ActionHandler {
