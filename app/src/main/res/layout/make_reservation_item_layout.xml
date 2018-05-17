@@ -34,7 +34,7 @@
                 android:orientation="vertical"
                 android:paddingEnd="10dp"
                 android:paddingStart="15dp"
-                android:paddingTop="15dp">
+                android:paddingTop="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,7 +46,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="PIII1"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/free_reservation_classroom_type"
@@ -60,29 +61,60 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/free_reservation_date"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Date"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/free_reservation_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Date"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/free_reservation_week_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="WeekType"
+                        android:textAlignment="center"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/free_reservation_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Hour"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/free_reservation_day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Day"
+                        android:textAlignment="center"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/free_reservation_day"
+                    android:id="@+id/free_reservation_students_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Day"
+                    android:text="Students Group"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/free_reservation_hour"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Hour"
-                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 

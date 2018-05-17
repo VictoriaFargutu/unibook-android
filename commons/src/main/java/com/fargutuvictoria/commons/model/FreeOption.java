@@ -1,7 +1,6 @@
 package com.fargutuvictoria.commons.model;
 
 
-import com.fargutuvictoria.commons.model.commons.ClassroomType;
 import com.fargutuvictoria.commons.model.commons.Day;
 import com.fargutuvictoria.commons.model.commons.Hour;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
@@ -10,22 +9,13 @@ import com.fargutuvictoria.commons.model.commons.WeekType;
 import java.util.Date;
 
 public class FreeOption {
-    private ClassroomType classroomType;
     private Classroom classroom;
     private WeekType weekType;
     private Date date;
     private Day day;
-    private Hour hour;
+    private String hour;
     private StudentsGroup studentsGroup;
     private Subgroup subgroup;
-
-    public ClassroomType getClassroomType() {
-        return classroomType;
-    }
-
-    public void setClassroomType(ClassroomType classroomType) {
-        this.classroomType = classroomType;
-    }
 
     public Classroom getClassroom() {
         return classroom;
@@ -59,11 +49,11 @@ public class FreeOption {
         this.day = day;
     }
 
-    public Hour getHour() {
+    public String getHour() {
         return hour;
     }
 
-    public void setHour(Hour hour) {
+    public void setHour(String hour) {
         this.hour = hour;
     }
 

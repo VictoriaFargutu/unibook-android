@@ -1,7 +1,7 @@
 ext.app = [
         "id"                       : "com.fargutuvictoria.unibook",
         "name"                     : "unibook",
-        "minSdkVersion"            : 21,
+        "minSdkVersion"            : 17,
         "compileSdkVersion"        : 26,
         "targetSdkVersion"         : 26,
         "versionCode"              : 1,

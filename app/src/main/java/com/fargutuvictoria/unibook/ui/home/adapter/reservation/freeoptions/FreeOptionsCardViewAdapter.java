@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptionsCardViewAdapter.FreeOptionsViewHolder> {
     private List<FreeOption> freeOptions;
@@ -38,16 +40,40 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
 
     public class FreeOptionsViewHolder extends RecyclerView.ViewHolder {
         private final TextView freeOptionClassroom;
+        private final TextView classroomType;
+        private final TextView date;
+        private final TextView weekType;
+        private final TextView day;
+        private final TextView hour;
+        private final TextView studentsGroup;
+
         private FreeOption freeOption;
 
         public FreeOptionsViewHolder(View itemView) {
             super(itemView);
             freeOptionClassroom = itemView.findViewById(R.id.free_reservation_classroom);
+            classroomType = itemView.findViewById(R.id.free_reservation_classroom_type);
+            date = itemView.findViewById(R.id.free_reservation_date);
+            weekType = itemView.findViewById(R.id.free_reservation_week_type);
+            day = itemView.findViewById(R.id.free_reservation_day);
+            hour = itemView.findViewById(R.id.free_reservation_hour);
+            studentsGroup = itemView.findViewById(R.id.free_reservation_students_group);
         }
 
         private void bind(FreeOption freeOption) {
             freeOptionClassroom.setText(freeOption.getClassroom().getName());
+            classroomType.setText(freeOption.getClassroom().getType());
 
+            String myFormat = "dd/MM/yy";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            date.setText(sdf.format(freeOption.getDate()));
+
+            weekType.setText(freeOption.getWeekType().name());
+            day.setText(freeOption.getDay().name());
+            hour.setText(freeOption.getHour());
+            if(freeOption.getStudentsGroup() != null) {
+                studentsGroup.setText(freeOption.getStudentsGroup().getName());
+            }
             this.freeOption = freeOption;
         }
     }
