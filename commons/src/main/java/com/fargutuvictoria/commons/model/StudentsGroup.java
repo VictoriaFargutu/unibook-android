@@ -1,11 +1,13 @@
 package com.fargutuvictoria.commons.model;
 
 
+import com.fargutuvictoria.commons.model.commons.Specialization;
+
 public class StudentsGroup {
     private Long id;
     private String name;
     private String year;
-    private String specialization;
+    private Specialization specialization;
 
     public Long getId() {
         return id;
@@ -31,11 +33,11 @@ public class StudentsGroup {
         this.year = year;
     }
 
-    public String getSpecialization() {
+    public Specialization getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(String specialization) {
+    public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
 }

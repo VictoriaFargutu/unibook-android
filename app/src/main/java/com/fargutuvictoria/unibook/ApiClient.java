@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static ApiClient INSTANCE;
 
-    private static final String BASE_URL = "http://192.168.1.4:2020"; //Ip local
+    private static final String BASE_URL = "http://192.168.0.109:2020"; //Ip local
 
     private Retrofit retrofit;
 

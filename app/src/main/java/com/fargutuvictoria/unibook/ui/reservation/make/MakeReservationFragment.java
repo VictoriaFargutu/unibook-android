@@ -35,7 +35,9 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
         recyclerView = view.findViewById(R.id.recycler_view);
         Intent intent = getActivity().getIntent();
         Classroom classroom = (Classroom) intent.getSerializableExtra("classroom");
-        makeReservationPresenter.loadFreeOptions(classroom);
+        if (classroom != null) {
+            makeReservationPresenter.loadFreeOptions(classroom);
+        }
     }
 
     @Override

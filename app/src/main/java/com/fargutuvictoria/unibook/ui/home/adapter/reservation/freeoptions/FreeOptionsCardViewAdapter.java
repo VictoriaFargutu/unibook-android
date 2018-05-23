@@ -71,8 +71,10 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
             weekType.setText(freeOption.getWeekType().name());
             day.setText(freeOption.getDay().name());
             hour.setText(freeOption.getHour());
-            if(freeOption.getStudentsGroup() != null) {
+            if (freeOption.getStudentsGroup() != null) {
                 studentsGroup.setText(freeOption.getStudentsGroup().getName());
+            } else {
+                studentsGroup.setText("");
             }
             this.freeOption = freeOption;
         }
