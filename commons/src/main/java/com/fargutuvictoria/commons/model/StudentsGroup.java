@@ -40,4 +40,9 @@ public class StudentsGroup {
     public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
