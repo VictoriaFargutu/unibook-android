@@ -9,6 +9,8 @@ public interface ReservationFilterContract {
     interface View {
         void showClassroomTypes();
 
+        void showDays();
+
         void showWeekTypes();
 
         void showHours();

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
+import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.home.adapter.classroom.ClassroomListViewAdapter;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
@@ -46,6 +47,7 @@ public class CourseRoomFragment extends Fragment implements CourseRoomContract.F
     public void openReservationActivity(Classroom classroom) {
         Intent intent = new Intent(this.getActivity(), ReservationActivity.class);
         intent.putExtra("classroom", classroom);
+        intent.putExtra("toFilterFrom", ToFilterFrom.FROM_CLASSROOM);
         startActivity(intent);
     }
 }

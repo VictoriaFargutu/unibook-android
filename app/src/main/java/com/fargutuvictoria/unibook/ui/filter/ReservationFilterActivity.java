@@ -14,17 +14,21 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.fargutuvictoria.commons.model.Filter;
 import com.fargutuvictoria.commons.model.StudentsGroup;
 import com.fargutuvictoria.commons.model.commons.ClassroomType;
+import com.fargutuvictoria.commons.model.commons.Day;
 import com.fargutuvictoria.commons.model.commons.Hour;
 import com.fargutuvictoria.commons.model.commons.Specialization;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.commons.model.commons.WeekType;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
+import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 import java.text.SimpleDateFormat;
@@ -37,9 +41,12 @@ import java.util.Locale;
 public class ReservationFilterActivity extends AppCompatActivity implements ReservationFilterContract.View {
     private ReservationFilterPresenter reservationFilterPresenter;
 
+    private RelativeLayout classroomTypeLayout;
+
     private EditText dateEditText;
 
     private Spinner classroomTypeSpinner;
+    private Spinner daySpinner;
     private Spinner weekTypeSpinner;
     private Spinner hourSpinner;
     private Spinner yearSpinner;
@@ -50,6 +57,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
     private Button applyButton;
 
     private CheckBox classroomTypeCheckBox;
+    private CheckBox dayCheckBox;
     private CheckBox weekTypeCheckBox;
     private CheckBox dateCheckBox;
     private CheckBox hourCheckBox;
@@ -71,9 +79,18 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        classroomTypeLayout = findViewById(R.id.classroom_type);
+
+        Intent intent = getIntent();
+        final String fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
+        if (fromFilter != null && fromFilter.equals(ToFilterFrom.FROM_CLASSROOM)) {
+            classroomTypeLayout.setVisibility(View.GONE);
+        }
+
         dateEditText = findViewById(R.id.date_picker);
         classroomTypeSpinner = findViewById(R.id.classroom_type_spinner);
         weekTypeSpinner = findViewById(R.id.week_type_spinner);
+        daySpinner = findViewById(R.id.day_spinner);
         hourSpinner = findViewById(R.id.hour_spinner);
         yearSpinner = findViewById(R.id.year_spinner);
         specializationSpinner = findViewById(R.id.specialization_spinner);
@@ -88,6 +105,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         reservationFilterPresenter.loadStudentsGroups();
 
         showClassroomTypes();
+        showDays();
         showWeekTypes();
         showHours();
         showYear();
@@ -127,6 +145,14 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
             }
         });
+
+        dayCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+
 
         weekTypeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -182,6 +208,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             @Override
             public void onClick(View view) {
                 classroomTypeCheckBox.setChecked(false);
+                dayCheckBox.setChecked(false);
                 weekTypeCheckBox.setChecked(false);
                 dateCheckBox.setChecked(false);
                 hourCheckBox.setChecked(false);
@@ -194,6 +221,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             ClassroomType classroomType = null;
+            Day day = null;
             WeekType weekType = null;
             Date date = null;
             String hour = null;
@@ -204,31 +232,60 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
             @Override
             public void onClick(View view) {
+                int count = 0;
                 if (validateFilters()) {
                     if (classroomTypeCheckBox.isChecked()) {
                         classroomType = (ClassroomType) classroomTypeSpinner.getSelectedItem();
+                        count++;
+                    }
+                    if (dayCheckBox.isChecked()) {
+                        day = (Day) daySpinner.getSelectedItem();
+                        count++;
                     }
                     if (weekTypeCheckBox.isChecked()) {
                         weekType = (WeekType) weekTypeSpinner.getSelectedItem();
+                        count++;
                     }
                     if (dateCheckBox.isChecked()) {
                         date = calendar.getTime();
+                        count++;
                     }
-
                     if (hourCheckBox.isChecked()) {
                         hour = hourSpinner.getSelectedItem().toString();
+                        count++;
                     }
                     if (yearCheckBox.isChecked()) {
                         year = (Integer) yearSpinner.getSelectedItem();
+                        count++;
                     }
                     if (specializationCheckBox.isChecked()) {
                         specialization = (Specialization) specializationSpinner.getSelectedItem();
+                        count++;
                     }
                     if (studentsGroupCheckBox.isChecked()) {
                         studentsGroup = (StudentsGroup) studentsGroupSpinner.getSelectedItem();
+                        count++;
                     }
                     if (studentsSubgroupCheckBox.isChecked()) {
                         studentsSubgroup = (Subgroup) studentsSubgroupSpinner.getSelectedItem();
+                        count++;
+                    }
+                    Filter filter = new Filter();
+                    filter.setClassroomType(classroomType);
+                    filter.setWeekType(weekType);
+                    filter.setDay(day);
+                    filter.setDate(date);
+                    filter.setHour(hour);
+                    if (year != null) {
+                        filter.setYear(year.toString());
+                    } else {
+                        filter.setYear(null);
+                    }
+                    filter.setSpecialization(specialization);
+                    filter.setStudentsGroup(studentsGroup);
+                    filter.setSubgroup(studentsSubgroup);
+                    if (count == 0) {
+                        //TODO make request without any filter
                     }
                     //TODO make request
                 }
@@ -263,6 +320,24 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+    }
+
+    @Override
+    public void showDays() {
+        ArrayAdapter<Day> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Day.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        daySpinner.setAdapter(adapter);
+        daySpinner.setSelection(0, true);
+
+        daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
     }
@@ -416,6 +491,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
     private void initializeCheckBoxes() {
         classroomTypeCheckBox = findViewById(R.id.classroom_type_checkbox);
+        dayCheckBox = findViewById(R.id.day_checkbox);
         weekTypeCheckBox = findViewById(R.id.week_type_checkbox);
         dateCheckBox = findViewById(R.id.date_checkbox);
         hourCheckBox = findViewById(R.id.hour_checkbox);
@@ -430,6 +506,13 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             Toast.makeText(UnibookApplication.getInstance(), "Please select the date or uncheck this filter!", Toast.LENGTH_LONG).show();
             return false;
         }
+        Day currentDay = initializeCurrentDay();
+        if (dayCheckBox.isChecked() && dateCheckBox.isChecked() && dateEditText.getText().toString().matches(".*\\d+.*")) {
+            if (!daySpinner.getSelectedItem().equals(currentDay)) {
+                Toast.makeText(UnibookApplication.getInstance(), "Please select a valid date, it should match the selected day!", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         if (hourCheckBox.isChecked() && currentHour >= Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2))) {
             Toast.makeText(UnibookApplication.getInstance(), "Please introduce a valid time!", Toast.LENGTH_LONG).show();
@@ -438,10 +521,33 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         Calendar tempCalendar = Calendar.getInstance();
         tempCalendar.setTime(calendar.getTime());
         tempCalendar.set(Calendar.HOUR, Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2)));
-        if (tempCalendar.getTime().before(new Date())) {
+        if (dateCheckBox.isChecked() && tempCalendar.getTime().before(new Date())) {
             Toast.makeText(UnibookApplication.getInstance(), "Please introduce a valid date, today or after:))!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
+    }
+
+    private Day initializeCurrentDay() {
+        Day currentDay = null;
+        int currentIntDay = calendar.get(Calendar.DAY_OF_WEEK);
+        if (currentIntDay == 1) {
+            currentDay = Day.SUNDAY;
+        } else if (currentIntDay == 2) {
+            currentDay = Day.MONDAY;
+        } else if (currentIntDay == 3) {
+            currentDay = Day.TUESDAY;
+        } else if (currentIntDay == 4) {
+            currentDay = Day.WEDNESDAY;
+        } else if (currentIntDay == 5) {
+            currentDay = Day.THURSDAY;
+        } else if (currentIntDay == 6) {
+            currentDay = Day.FRIDAY;
+        } else if (currentIntDay == 7) {
+            currentDay = Day.SATURDAY;
+        }
+
+        return currentDay;
+
     }
 }

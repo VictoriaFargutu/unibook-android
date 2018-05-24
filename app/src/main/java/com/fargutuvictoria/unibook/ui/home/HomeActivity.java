@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.fargutuvictoria.unibook.R;
+import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.home.adapter.HomeFragmentPagerAdapter;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
@@ -69,6 +70,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.reservation:
                 Intent intent = new Intent(HomeActivity.this, ReservationActivity.class);
+                intent.putExtra("toFilterFrom", ToFilterFrom.FROM_HOME);
                 startActivity(intent);
                 return true;
             case R.id.notification:

@@ -45,10 +45,14 @@ public class ReservationActivity extends AppCompatActivity {
         final Button filter_button = findViewById(R.id.filters_button);
         final LinearLayout reservationQuickView = findViewById(R.id.reservation_quick_view);
 
+        Intent intent = getIntent();
+        final String fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
+
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ReservationFilterActivity.class);
+                intent.putExtra("toFilterFrom", fromFilter);
                 startActivity(intent);
             }
         });
