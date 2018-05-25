@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.commons.TabConstants;
 import com.fargutuvictoria.unibook.ui.filter.ReservationFilterActivity;
@@ -47,12 +48,14 @@ public class ReservationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
+        final Classroom classroom = (Classroom) intent.getSerializableExtra("classroom");
 
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ReservationFilterActivity.class);
                 intent.putExtra("toFilterFrom", fromFilter);
+                intent.putExtra("classroom", classroom);
                 startActivity(intent);
             }
         });

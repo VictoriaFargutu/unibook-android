@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.commons.model.Filter;
 import com.fargutuvictoria.commons.model.StudentsGroup;
 import com.fargutuvictoria.commons.model.commons.ClassroomType;
@@ -69,6 +70,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
     private Calendar calendar;
 
     private List<StudentsGroup> studentsGroups;
+    private Classroom classroom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         if (fromFilter != null && fromFilter.equals(ToFilterFrom.FROM_CLASSROOM)) {
             classroomTypeLayout.setVisibility(View.GONE);
         }
+        classroom = (Classroom) intent.getSerializableExtra("classroom");
 
         dateEditText = findViewById(R.id.date_picker);
         classroomTypeSpinner = findViewById(R.id.classroom_type_spinner);
@@ -298,6 +301,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(this, ReservationActivity.class);
+                intent.putExtra("classroom", classroom);
                 startActivity(intent);
                 return true;
             default:
