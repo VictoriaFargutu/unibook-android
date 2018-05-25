@@ -274,6 +274,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                         count++;
                     }
                     Filter filter = new Filter();
+                    filter.setClassroom(classroom);
                     filter.setClassroomType(classroomType);
                     filter.setWeekType(weekType);
                     filter.setDay(day);
@@ -288,8 +289,17 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                     filter.setStudentsGroup(studentsGroup);
                     filter.setSubgroup(studentsSubgroup);
                     if (count == 0) {
-                        //TODO make request without any filter
+                        // make request without any filter(go back to how it was)
+                        Intent intent = new Intent(ReservationFilterActivity.this, ReservationActivity.class);
+                        intent.putExtra("classroom", classroom);
+                        intent.putExtra("toFilterFrom", fromFilter);
+                        startActivity(intent);
                     }
+                    Intent intent = new Intent(ReservationFilterActivity.this, ReservationActivity.class);
+                    intent.putExtra("classroom", classroom);
+                    intent.putExtra("toFilterFrom", fromFilter);
+                    intent.putExtra("filter", filter);
+                    startActivity(intent);
                     //TODO make request
                 }
             }

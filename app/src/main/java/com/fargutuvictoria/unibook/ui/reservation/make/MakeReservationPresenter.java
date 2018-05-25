@@ -5,10 +5,13 @@ import android.widget.Toast;
 
 import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.commons.model.ExceptionInfo;
+import com.fargutuvictoria.commons.model.Filter;
 import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByClassroomInteractor;
 import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByClassroomInteractorImpl;
+import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByFilterInteractor;
+import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByFilterInteractorImpl;
 
 import java.util.List;
 
@@ -20,9 +23,15 @@ public class MakeReservationPresenter implements MakeReservationContract.Present
     }
 
     @Override
-    public void loadFreeOptions(Classroom classroom) {
+    public void loadFreeOptionsByClassroom(Classroom classroom) {
         GetFreeOptionsByClassroomInteractor getFreeOptionsByClassroomInteractor = new GetFreeOptionsByClassroomInteractorImpl();
         getFreeOptionsByClassroomInteractor.initiate(classroom, this);
+    }
+
+    @Override
+    public void loadFreeOptionsByFilter(Filter filter) {
+        GetFreeOptionsByFilterInteractor getFreeOptionsByFilterInteractor = new GetFreeOptionsByFilterInteractorImpl();
+        getFreeOptionsByFilterInteractor.initiate(filter, this);
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.fargutuvictoria.commons.model.Classroom;
+import com.fargutuvictoria.commons.model.Filter;
 import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
@@ -35,8 +36,11 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
         recyclerView = view.findViewById(R.id.recycler_view);
         Intent intent = getActivity().getIntent();
         Classroom classroom = (Classroom) intent.getSerializableExtra("classroom");
+        Filter filter = (Filter) intent.getSerializableExtra("filter");
         if (classroom != null) {
-            makeReservationPresenter.loadFreeOptions(classroom);
+            makeReservationPresenter.loadFreeOptionsByClassroom(classroom);
+        } else if (filter != null) {
+            makeReservationPresenter.loadFreeOptionsByFilter(filter);
         }
     }
 

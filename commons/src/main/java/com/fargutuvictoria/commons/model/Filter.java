@@ -6,9 +6,11 @@ import com.fargutuvictoria.commons.model.commons.Specialization;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.commons.model.commons.WeekType;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Filter {
+public class Filter implements Serializable{
+    private Classroom classroom;
     private ClassroomType classroomType;
     private WeekType weekType;
     private Day day;
@@ -18,6 +20,14 @@ public class Filter {
     private Specialization specialization;
     private StudentsGroup studentsGroup;
     private Subgroup subgroup;
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
+    }
 
     public ClassroomType getClassroomType() {
         return classroomType;
