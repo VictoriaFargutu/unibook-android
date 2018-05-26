@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile project(":commons")
+    api project(":commons")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Retrofit & OkHttp
     api 'com.squareup.retrofit2:retrofit:2.3.0'

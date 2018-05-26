@@ -28,102 +28,166 @@
     <LinearLayout
         android:id="@+id/date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/make_reservation_app_bar">
+        android:layout_height="40dp"
+        android:layout_below="@+id/make_reservation_app_bar"
+        android:layout_marginTop="20dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Date: " />
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:text="Date: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/date_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:textColor="@color/hintText"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/week_type"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/date">
+        android:layout_height="40dp"
+        android:layout_below="@+id/date"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Week Type: " />
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:text="Week Type: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/week_type_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:textColor="@color/hintText"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/day"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/week_type">
+        android:layout_height="40dp"
+        android:layout_below="@+id/week_type"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Day: " />
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:text="Day: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/day_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:textColor="@color/hintText"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/hour"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/day">
+        android:layout_height="40dp"
+        android:layout_below="@+id/day"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Hour: " />
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:text="Hour: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/hour_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:textColor="@color/hintText"
+            android:textSize="18sp" />
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/classroom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hour">
+        android:layout_height="40dp"
+
+        android:layout_below="@+id/hour"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Classroom: " />
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:text="Classroom: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/classroom_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:textColor="@color/hintText"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/course"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/classroom">
+        android:layout_height="40dp"
+        android:layout_below="@id/classroom"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:text="Course: " />
+            android:text="Course: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <Spinner
+            android:id="@+id/course_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.5" />
 
     </LinearLayout>
@@ -131,18 +195,25 @@
     <LinearLayout
         android:id="@+id/students_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/course">
+        android:layout_height="40dp"
+        android:layout_below="@id/course"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:text="Students Group: " />
+            android:text="Students Group: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <Spinner
+            android:id="@+id/students_group_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.5" />
 
     </LinearLayout>
@@ -150,28 +221,37 @@
     <LinearLayout
         android:id="@+id/subgroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/students_group">
+        android:layout_height="40dp"
+        android:layout_below="@id/students_group"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:text="Subgroup: " />
+            android:text="Subgroup: "
+            android:textColor="@color/hintText"
+            android:textSize="17sp" />
 
         <Spinner
+            android:id="@+id/subgroup_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.5" />
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/make_reservation_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/subgroup"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"
         android:background="@color/colorPrimary"
         android:paddingEnd="10dp"
         android:paddingStart="10dp"
