@@ -71,6 +71,8 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
     private List<StudentsGroup> studentsGroups;
     private Classroom classroom;
+    private String fromFilter;
+    private Filter filter = new Filter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         classroomTypeLayout = findViewById(R.id.classroom_type);
 
         Intent intent = getIntent();
-        final String fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
+        fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
         if (fromFilter != null && fromFilter.equals(ToFilterFrom.FROM_CLASSROOM)) {
             classroomTypeLayout.setVisibility(View.GONE);
         }
@@ -273,7 +275,6 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                         studentsSubgroup = (Subgroup) studentsSubgroupSpinner.getSelectedItem();
                         count++;
                     }
-                    Filter filter = new Filter();
                     filter.setClassroom(classroom);
                     filter.setClassroomType(classroomType);
                     filter.setWeekType(weekType);
@@ -311,7 +312,9 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(this, ReservationActivity.class);
+                intent.putExtra("toFilterFrom", fromFilter);
                 intent.putExtra("classroom", classroom);
+                intent.putExtra("filter", filter);
                 startActivity(intent);
                 return true;
             default:

@@ -16,7 +16,8 @@ import com.fargutuvictoria.commons.model.Filter;
 import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
-import com.fargutuvictoria.unibook.ui.home.adapter.reservation.freeoptions.FreeOptionsCardViewAdapter;
+import com.fargutuvictoria.unibook.ui.free_option.FreeOptionActivity;
+import com.fargutuvictoria.unibook.ui.reservation.adapter.freeoptions.FreeOptionsCardViewAdapter;
 
 import java.util.List;
 
@@ -41,12 +42,21 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
             makeReservationPresenter.loadFreeOptionsByClassroom(classroom);
         } else if (filter != null) {
             makeReservationPresenter.loadFreeOptionsByFilter(filter);
+        } else {
+            makeReservationPresenter.loadFreeOptions();
         }
     }
 
     @Override
+    public void openFreeOptionActivity(FreeOption freeOption) {
+        Intent intent = new Intent(getActivity(), FreeOptionActivity.class);
+        intent.putExtra("freeOption", freeOption);
+        startActivity(intent);
+    }
+
+    @Override
     public void showOptionsLoaded(List<FreeOption> freeOptions) {
-        RecyclerView.Adapter recylerAdapter = new FreeOptionsCardViewAdapter(freeOptions);
+        RecyclerView.Adapter recylerAdapter = new FreeOptionsCardViewAdapter(freeOptions, makeReservationPresenter);
         recyclerView.setAdapter(recylerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(UnibookApplication.getInstance()));
     }

@@ -10,14 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
-import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationListViewAdapter;
+import com.fargutuvictoria.unibook.ui.reservation.adapter.ReservationListViewAdapter;
 
 import java.util.Calendar;
 import java.util.List;
@@ -29,13 +28,14 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
 
     private TextView reservationQuickClassroom;
     private TextView reservationQuickDay;
+    private TextView reservationQuickWeekType;
     private TextView reservationQuickCourse;
     private TextView reservationQuickHour;
     private TextView reservationQuickDate;
     private TextView reservationQuickStudentsGroup;
     private TextView reservationQuickStudentsYear;
     private Button cancelReservationButton;
-    private ImageView closeQuickViewButton;
+    private Button closeQuickViewButton;
 
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         reservationQuickView = getActivity().findViewById(R.id.reservation_quick_view);
         reservationQuickClassroom = reservationQuickView.findViewById(R.id.reservation_quick_classroom);
         reservationQuickDay = reservationQuickView.findViewById(R.id.reservation_quick_day);
+        reservationQuickWeekType = reservationQuickView.findViewById(R.id.reservation_week_type);
         reservationQuickCourse = reservationQuickView.findViewById(R.id.reservation_quick_course);
         reservationQuickHour = reservationQuickView.findViewById(R.id.reservation_quick_hour);
         reservationQuickDate = reservationQuickView.findViewById(R.id.reservation_quick_date);
@@ -80,9 +81,10 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         reservationQuickDate.setText(date);
         reservationQuickHour.setText(reservation.getHour());
         reservationQuickDay.setText(reservation.getDay());
+        reservationQuickWeekType.setText(reservation.getWeekType());
         reservationQuickCourse.setText(reservation.getCourse().getName());
         reservationQuickStudentsGroup.setText(reservation.getStudentsGroup().getName());
-        reservationQuickStudentsYear.setText(reservation.getStudentsGroup().getYear());
+        reservationQuickStudentsYear.setText("Year: " + reservation.getStudentsGroup().getYear());
         reservationQuickView.setVisibility(View.VISIBLE);
 
         cancelReservationButton.setOnClickListener(new View.OnClickListener() {

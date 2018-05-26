@@ -20,4 +20,6 @@
     <string name="filters">Filters</string>
     <string name="reset">Reset</string>
     <string name="choose_the_date">Choose the date...</string>
+    <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
 </resources>

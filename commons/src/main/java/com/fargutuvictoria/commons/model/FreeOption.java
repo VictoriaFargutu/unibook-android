@@ -2,13 +2,13 @@ package com.fargutuvictoria.commons.model;
 
 
 import com.fargutuvictoria.commons.model.commons.Day;
-import com.fargutuvictoria.commons.model.commons.Hour;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.commons.model.commons.WeekType;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FreeOption {
+public class FreeOption implements Serializable {
     private Classroom classroom;
     private WeekType weekType;
     private Date date;

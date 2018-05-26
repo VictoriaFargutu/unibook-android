@@ -16,7 +16,7 @@ import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.commons.TabConstants;
 import com.fargutuvictoria.unibook.ui.filter.ReservationFilterActivity;
 import com.fargutuvictoria.unibook.ui.home.HomeActivity;
-import com.fargutuvictoria.unibook.ui.home.adapter.reservation.ReservationFragmentPagerAdapter;
+import com.fargutuvictoria.unibook.ui.reservation.adapter.ReservationFragmentPagerAdapter;
 
 public class ReservationActivity extends AppCompatActivity {
     private TabLayout tabLayout;

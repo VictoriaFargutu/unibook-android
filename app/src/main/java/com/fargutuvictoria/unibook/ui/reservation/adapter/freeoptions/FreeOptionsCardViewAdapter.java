@@ -1,4 +1,4 @@
-package com.fargutuvictoria.unibook.ui.home.adapter.reservation.freeoptions;
+package com.fargutuvictoria.unibook.ui.reservation.adapter.freeoptions;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -16,9 +16,11 @@ import java.util.Locale;
 
 public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptionsCardViewAdapter.FreeOptionsViewHolder> {
     private List<FreeOption> freeOptions;
+    private ActionHandler actionHandler;
 
-    public FreeOptionsCardViewAdapter(List<FreeOption> freeOptions) {
+    public FreeOptionsCardViewAdapter(List<FreeOption> freeOptions, ActionHandler actionHandler) {
         this.freeOptions = freeOptions;
+        this.actionHandler = actionHandler;
     }
 
     @Override
@@ -58,6 +60,13 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
             day = itemView.findViewById(R.id.free_reservation_day);
             hour = itemView.findViewById(R.id.free_reservation_hour);
             studentsGroup = itemView.findViewById(R.id.free_reservation_students_group);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    actionHandler.onArrowClick(freeOption);
+                }
+            });
         }
 
         private void bind(FreeOption freeOption) {
@@ -67,7 +76,6 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
             String myFormat = "dd/MM/yy";
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
             date.setText(sdf.format(freeOption.getDate()));
-
             weekType.setText(freeOption.getWeekType().name());
             day.setText(freeOption.getDay().name());
             hour.setText(freeOption.getHour());

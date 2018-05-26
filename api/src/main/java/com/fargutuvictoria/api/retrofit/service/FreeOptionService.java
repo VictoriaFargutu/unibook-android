@@ -18,4 +18,7 @@ public interface FreeOptionService {
 
     @POST("/freeOptions/filters")
     Call<List<FreeOption>> getAllFreeOptionsByFilter(@Body Filter filter);
+
+    @GET("/freeOptions/all")
+    Call<List<FreeOption>> getAllFreeOptions();
 }

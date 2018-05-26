@@ -12,14 +12,21 @@ import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptions
 import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByClassroomInteractorImpl;
 import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByFilterInteractor;
 import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsByFilterInteractorImpl;
+import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsInteractor;
+import com.fargutuvictoria.unibook.network.interactor.free_option.GetFreeOptionsInteractorImpl;
 
 import java.util.List;
 
-public class MakeReservationPresenter implements MakeReservationContract.Presenter, GetFreeOptionsByClassroomInteractor.Callback {
+public class MakeReservationPresenter implements MakeReservationContract.Presenter, GetFreeOptionsByClassroomInteractor.Callback, GetFreeOptionsByFilterInteractor.Callback, GetFreeOptionsInteractor.Callback {
     private MakeReservationContract.Fragment fragment;
 
     public MakeReservationPresenter(MakeReservationContract.Fragment fragment) {
         this.fragment = fragment;
+    }
+
+    @Override
+    public void onArrowClick(FreeOption freeOption) {
+        fragment.openFreeOptionActivity(freeOption);
     }
 
     @Override
@@ -32,6 +39,13 @@ public class MakeReservationPresenter implements MakeReservationContract.Present
     public void loadFreeOptionsByFilter(Filter filter) {
         GetFreeOptionsByFilterInteractor getFreeOptionsByFilterInteractor = new GetFreeOptionsByFilterInteractorImpl();
         getFreeOptionsByFilterInteractor.initiate(filter, this);
+    }
+
+    @Override
+    public void loadFreeOptions() {
+        GetFreeOptionsInteractor getFreeOptionsInteractor = new GetFreeOptionsInteractorImpl();
+        getFreeOptionsInteractor.initiate(this);
+
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.fargutuvictoria.unibook.ui.home.adapter.reservation;
+package com.fargutuvictoria.unibook.ui.reservation.adapter;
 
 
 import android.content.Context;

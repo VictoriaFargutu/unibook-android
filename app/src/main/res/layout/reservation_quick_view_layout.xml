@@ -46,21 +46,10 @@
                     android:id="@+id/reservation_quick_classroom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/close_button"
                     android:background="@drawable/border_background"
                     android:paddingStart="10dp"
                     android:text="PII3"
                     android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/close_button"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
-                    android:src="@drawable/ic_close_black_24dp" />
 
             </RelativeLayout>
 
@@ -95,19 +84,36 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/reservation_quick_day"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:background="@drawable/border_background"
+                android:orientation="horizontal"
                 android:paddingBottom="3dp"
-                android:paddingEnd="3dp"
-                android:paddingStart="10dp"
-                android:paddingTop="3dp"
-                android:text="Day"
-                android:textSize="14sp" />
+                android:paddingTop="3dp">
+
+                <TextView
+                    android:id="@+id/reservation_quick_day"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/border_background"
+                    android:paddingEnd="3dp"
+                    android:paddingStart="10dp"
+                    android:text="Day"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/reservation_week_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/border_background"
+                    android:paddingEnd="3dp"
+                    android:paddingStart="10dp"
+                    android:text="WeekType"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/reservation_quick_course"
@@ -158,17 +164,39 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/quick_cancel_reservation"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="6dp"
-        android:background="@color/colorPrimary"
-        android:paddingEnd="10dp"
-        android:paddingStart="10dp"
-        android:text="@string/cancel_reservation"
-        android:textColor="@color/secondaryTextColor"
-        android:textSize="12sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:paddingStart="10dp">
+
+        <Button
+            android:id="@+id/quick_cancel_reservation"
+            android:layout_width="160dp"
+            android:layout_height="35dp"
+
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@color/colorPrimary"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/cancel_reservation"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/close_button"
+            android:layout_width="160dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="15dp"
+            android:background="@color/colorPrimary"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/close"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="12sp" />
+    </LinearLayout>
 
 </LinearLayout>
