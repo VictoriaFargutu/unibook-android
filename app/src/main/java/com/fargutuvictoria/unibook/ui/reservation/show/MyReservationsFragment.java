@@ -19,6 +19,7 @@ import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.ui.reservation.adapter.ReservationListViewAdapter;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MyReservationsFragment extends Fragment implements MyReservationsContract.Fragment {
@@ -72,7 +73,7 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
     @Override
     public void openReservationQuickView(final Reservation reservation) {
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(reservation.getDate());
+        calendar.setTime(new Date(reservation.getDate()));
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
@@ -80,8 +81,8 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         reservationQuickClassroom.setText(reservation.getClassroom().getName());
         reservationQuickDate.setText(date);
         reservationQuickHour.setText(reservation.getHour());
-        reservationQuickDay.setText(reservation.getDay());
-        reservationQuickWeekType.setText(reservation.getWeekType());
+        reservationQuickDay.setText(reservation.getDay().name());
+        reservationQuickWeekType.setText(reservation.getWeekType().name());
         reservationQuickCourse.setText(reservation.getCourse().getName());
         reservationQuickStudentsGroup.setText(reservation.getStudentsGroup().getName());
         reservationQuickStudentsYear.setText("Year: " + reservation.getStudentsGroup().getYear());

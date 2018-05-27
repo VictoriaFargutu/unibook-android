@@ -11,6 +11,7 @@ import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.ui.reservation.show.MyReservationsContract;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ReservationListViewAdapter extends RecyclerView.Adapter<ReservationListViewAdapter.ReservationViewHolder> {
@@ -60,7 +61,7 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
         private void bind(Reservation reservation) {
             reservationClassroom.setText(reservation.getClassroom().getName());
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(reservation.getDate());
+            calendar.setTime(new Date(reservation.getDate()));
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);

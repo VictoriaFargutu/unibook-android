@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Date: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <TextView
@@ -49,7 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:textColor="@color/hintText"
+            android:paddingStart="5dp"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -68,7 +69,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Week Type: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <TextView
@@ -77,7 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:textColor="@color/hintText"
+            android:paddingStart="7dp"
+            android:textColor="@color/black"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -95,7 +97,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Day: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <TextView
@@ -104,7 +106,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:textColor="@color/hintText"
+            android:paddingStart="7dp"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -123,7 +126,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Hour: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <TextView
@@ -132,7 +135,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:textColor="@color/hintText"
+            android:paddingStart="7dp"
+            android:textColor="@color/black"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -152,7 +156,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Classroom: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <TextView
@@ -161,7 +165,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:textColor="@color/hintText"
+            android:paddingStart="7dp"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -180,7 +185,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Course: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <Spinner
@@ -206,7 +211,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Students Group: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <Spinner
@@ -232,7 +237,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:text="Subgroup: "
-            android:textColor="@color/hintText"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <Spinner

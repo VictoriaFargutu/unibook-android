@@ -8,11 +8,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fargutuvictoria.commons.model.Course;
 import com.fargutuvictoria.commons.model.FreeOption;
+import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.commons.model.StudentsGroup;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.unibook.R;
@@ -33,6 +35,7 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
     private Spinner coursesSpinner;
     private Spinner groupsSpinner;
     private Spinner subgroupsSpinner;
+    private Button makeReservationButton;
 
     private FreeOption freeOption;
 
@@ -57,12 +60,35 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         coursesSpinner = findViewById(R.id.course_spinner);
         groupsSpinner = findViewById(R.id.students_group_spinner);
         subgroupsSpinner = findViewById(R.id.subgroup_spinner);
+        makeReservationButton = findViewById(R.id.make_reservation_button);
 
         initializeFreeOptionActivityFields();
 
         presenter = new FreeOptionPresenter(this);
+        presenter.loadCourses();
         presenter.loadStudentsGroups();
         showSubgroups();
+
+        makeReservationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Reservation reservation = new Reservation();
+                reservation.setDate(freeOption.getDate().getTime());
+                reservation.setWeekType(freeOption.getWeekType());
+                reservation.setDay(freeOption.getDay());
+                reservation.setHour(freeOption.getHour());
+                if (coursesSpinner.getSelectedItem() != null) {
+                    reservation.setCourse((Course) coursesSpinner.getSelectedItem());
+                }
+                if (groupsSpinner.getSelectedItem() != null) {
+                    reservation.setStudentsGroup((StudentsGroup) groupsSpinner.getSelectedItem());
+                }
+                if (subgroupsSpinner.getSelectedItem() != null) {
+                    reservation.setSubgroup((Subgroup) subgroupsSpinner.getSelectedItem());
+                }
+                presenter.makeReservation(reservation);
+            }
+        });
     }
 
     private void initializeFreeOptionActivityFields() {
@@ -98,7 +124,10 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         ArrayAdapter<StudentsGroup> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroups);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         groupsSpinner.setAdapter(adapter);
-
+        if (freeOption.getStudentsGroup() != null) {
+            //TODO
+            groupsSpinner.setSelection(studentsGroups.indexOf(freeOption.getStudentsGroup()));
+        }
         groupsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -116,7 +145,9 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         ArrayAdapter<Subgroup> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Subgroup.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subgroupsSpinner.setAdapter(adapter);
-
+        if (freeOption.getSubgroup() != null) {
+            //TODO
+        }
         subgroupsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
