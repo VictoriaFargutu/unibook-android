@@ -59,7 +59,9 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
         }
 
         private void bind(Reservation reservation) {
-            reservationClassroom.setText(reservation.getClassroom().getName());
+            if (reservation.getClassroom() != null) {
+                reservationClassroom.setText(reservation.getClassroom().getName());
+            }
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date(reservation.getDate()));
             int day = calendar.get(Calendar.DAY_OF_MONTH);

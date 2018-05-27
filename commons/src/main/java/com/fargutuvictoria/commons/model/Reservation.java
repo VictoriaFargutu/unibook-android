@@ -18,6 +18,7 @@ public class Reservation {
     private Day day;
     private Long date;
     private String hour;
+    private User user;
 
     public Long getId() {
         return id;
@@ -89,5 +90,13 @@ public class Reservation {
 
     public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -6,8 +6,11 @@ public interface HomeContract {
 
     interface View {
         void openReservationActivity();
+
+        void openLoginActivity();
     }
 
     interface Presenter extends ActionHandler {
+        void logout();
     }
 }

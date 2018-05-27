@@ -15,11 +15,13 @@ import android.view.MenuItem;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.home.adapter.HomeFragmentPagerAdapter;
+import com.fargutuvictoria.unibook.ui.login.LoginActivity;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeContract.View {
     private TabLayout tabLayout;
     private DrawerLayout drawerLayout;
+    private HomePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // Give the TabLayout the ViewPager
         tabLayout = findViewById(R.id.home_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        presenter = new HomePresenter(this);
     }
 
     @Override
@@ -78,10 +82,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.profile:
                 return true;
             case R.id.log_out:
+                presenter.logout();
                 return true;
             default:
                 drawerLayout.closeDrawer(GravityCompat.START);
         }
         return false;
+    }
+
+    @Override
+    public void openReservationActivity() {
+        Intent intent = new Intent(HomeActivity.this, ReservationActivity.class);
+        intent.putExtra("toFilterFrom", ToFilterFrom.FROM_HOME);
+        startActivity(intent);
+    }
+
+    @Override
+    public void openLoginActivity() {
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 }

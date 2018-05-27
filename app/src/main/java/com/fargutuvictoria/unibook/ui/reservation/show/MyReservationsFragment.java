@@ -83,9 +83,13 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         reservationQuickHour.setText(reservation.getHour());
         reservationQuickDay.setText(reservation.getDay().name());
         reservationQuickWeekType.setText(reservation.getWeekType().name());
-        reservationQuickCourse.setText(reservation.getCourse().getName());
-        reservationQuickStudentsGroup.setText(reservation.getStudentsGroup().getName());
-        reservationQuickStudentsYear.setText("Year: " + reservation.getStudentsGroup().getYear());
+        if (reservation.getCourse() != null) {
+            reservationQuickCourse.setText(reservation.getCourse().getName());
+        }
+        if (reservation.getStudentsGroup() != null) {
+            reservationQuickStudentsGroup.setText(reservation.getStudentsGroup().getName());
+            reservationQuickStudentsYear.setText("Year: " + reservation.getStudentsGroup().getYear());
+        }
         reservationQuickView.setVisibility(View.VISIBLE);
 
         cancelReservationButton.setOnClickListener(new View.OnClickListener() {

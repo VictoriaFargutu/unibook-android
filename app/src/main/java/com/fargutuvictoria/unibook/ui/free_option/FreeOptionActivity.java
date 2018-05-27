@@ -73,6 +73,7 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
             @Override
             public void onClick(View v) {
                 Reservation reservation = new Reservation();
+                reservation.setClassroom(freeOption.getClassroom());
                 reservation.setDate(freeOption.getDate().getTime());
                 reservation.setWeekType(freeOption.getWeekType());
                 reservation.setDay(freeOption.getDay());
