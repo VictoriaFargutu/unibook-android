@@ -2,5 +2,5 @@ package com.fargutuvictoria.commons.model.commons;
 
 
 public enum Subgroup {
-    A, B
+    You_Can_Choose, A, B
 }

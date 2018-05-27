@@ -39,6 +39,8 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
     private FreeOption freeOption;
 
+    public static String YOU_CAN_CHOOSE = "You_Can_Choose";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +80,15 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                 reservation.setWeekType(freeOption.getWeekType());
                 reservation.setDay(freeOption.getDay());
                 reservation.setHour(freeOption.getHour());
-                if (coursesSpinner.getSelectedItem() != null) {
+                Course course = (Course) coursesSpinner.getSelectedItem();
+                if (course != null && !course.getName().equals(YOU_CAN_CHOOSE)) {
                     reservation.setCourse((Course) coursesSpinner.getSelectedItem());
                 }
-                if (groupsSpinner.getSelectedItem() != null) {
+                StudentsGroup studentsGroup = (StudentsGroup) groupsSpinner.getSelectedItem();
+                if (studentsGroup != null && !studentsGroup.getName().equals(YOU_CAN_CHOOSE)) {
                     reservation.setStudentsGroup((StudentsGroup) groupsSpinner.getSelectedItem());
                 }
-                if (subgroupsSpinner.getSelectedItem() != null) {
+                if (subgroupsSpinner.getSelectedItem() != null && subgroupsSpinner.getSelectedItem() != Subgroup.You_Can_Choose) {
                     reservation.setSubgroup((Subgroup) subgroupsSpinner.getSelectedItem());
                 }
                 presenter.makeReservation(reservation);
@@ -104,9 +108,14 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
     @Override
     public void showCourses(List<Course> courses) {
+        Course defaultNoSelection = new Course();
+        defaultNoSelection.setName(YOU_CAN_CHOOSE);
+        courses.add(0, defaultNoSelection);
         ArrayAdapter<Course> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, courses);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         coursesSpinner.setAdapter(adapter);
+        coursesSpinner.setSelection(0);
+
 
         coursesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -122,12 +131,16 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
     @Override
     public void showStudentsGroups(List<StudentsGroup> studentsGroups) {
+        StudentsGroup defaultNoSelection = new StudentsGroup();
+        defaultNoSelection.setName(YOU_CAN_CHOOSE);
+        studentsGroups.add(0, defaultNoSelection);
         ArrayAdapter<StudentsGroup> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroups);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         groupsSpinner.setAdapter(adapter);
         if (freeOption.getStudentsGroup() != null) {
-            //TODO
             groupsSpinner.setSelection(studentsGroups.indexOf(freeOption.getStudentsGroup()));
+        } else {
+            groupsSpinner.setSelection(0);
         }
         groupsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -147,7 +160,13 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subgroupsSpinner.setAdapter(adapter);
         if (freeOption.getSubgroup() != null) {
-            //TODO
+            if (freeOption.getSubgroup().equals(Subgroup.A)) {
+                subgroupsSpinner.setSelection(1);
+            } else if (freeOption.getSubgroup().equals(Subgroup.B)) {
+                subgroupsSpinner.setSelection(2);
+            }
+        } else {
+            subgroupsSpinner.setSelection(0);
         }
         subgroupsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
