@@ -1,11 +1,14 @@
 package com.fargutuvictoria.api.retrofit.service;
 
 import com.fargutuvictoria.commons.model.AuthSession;
+import com.fargutuvictoria.commons.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface AuthService {
 
@@ -17,4 +20,7 @@ public interface AuthService {
 
     @POST("/auth/logout")
     Call<Void> logout();
+
+    @PUT("/auth")
+    Call<User> resetPassword(@Query("newPassword") String newPassword);
 }

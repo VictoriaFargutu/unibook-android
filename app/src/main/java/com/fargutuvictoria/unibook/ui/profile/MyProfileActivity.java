@@ -9,13 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fargutuvictoria.commons.model.User;
 import com.fargutuvictoria.unibook.R;
+import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.auth.UserSession;
 import com.fargutuvictoria.unibook.ui.home.HomeActivity;
 
-public class MyProfileActivity extends AppCompatActivity {
+public class MyProfileActivity extends AppCompatActivity implements MyProfileContract.View {
+    private MyProfileContract.Presenter presenter;
+
     private TextView firstNameText;
     private TextView lastNameText;
     private TextView emailText;
@@ -47,6 +51,7 @@ public class MyProfileActivity extends AppCompatActivity {
         changePassword.setVisibility(View.GONE);
 
         User user = UserSession.getInstance().getLoggedInUser();
+        presenter = new MyProfilePresenter(this);
 
         firstNameText.setText(user.getFirstName());
         lastNameText.setText(user.getLastName());
@@ -66,16 +71,33 @@ public class MyProfileActivity extends AppCompatActivity {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (passwordText.getText().toString().equals(repeatPasswordText.getText().toString())) {
+                    presenter.resetPassword(passwordText.getText().toString());
+                } else {
+                    Toast.makeText(UnibookApplication.getInstance(), "Passwords must be equal!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MyProfileActivity.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void passwordChanged() {
+        Toast.makeText(UnibookApplication.getInstance(), "Password successfully changed!", Toast.LENGTH_LONG).show();
+        passwordText.setText(R.string.change_password);
+        repeatPasswordText.setText("");
+        repeatPasswordText.setHint("Repeat Password");
+        repeatPasswordText.setVisibility(View.GONE);
+        repeatPasswordTextView.setVisibility(View.GONE);
+        changePassword.setVisibility(View.GONE);
+
     }
 
     @Override

@@ -12,4 +12,16 @@
 
     </android.support.v7.widget.RecyclerView>
 
+
+    <TextView
+        android:id="@+id/no_reservations_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginTop="100dp"
+        android:text="You have no reservations!"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="30sp" />
+
 </RelativeLayout>

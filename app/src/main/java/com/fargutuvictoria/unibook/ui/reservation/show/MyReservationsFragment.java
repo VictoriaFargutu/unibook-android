@@ -40,6 +40,8 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
     private Button cancelReservationButton;
     private Button closeQuickViewButton;
 
+    private TextView noReservationsText;
+
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_list, container, false);
@@ -60,6 +62,9 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         cancelReservationButton = reservationQuickView.findViewById(R.id.quick_cancel_reservation);
         closeQuickViewButton = reservationQuickView.findViewById(R.id.close_button);
 
+        noReservationsText = view.findViewById(R.id.no_reservations_text_view);
+        noReservationsText.setVisibility(View.GONE);
+
         myReservationsPresenter = new MyReservationsPresenter(this);
         reservationsRecycler = view.findViewById(R.id.recycler_view);
         myReservationsPresenter.loadReservations();
@@ -70,6 +75,9 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         RecyclerView.Adapter recylerAdapter = new ReservationListViewAdapter(reservations, this);
         reservationsRecycler.setAdapter(recylerAdapter);
         reservationsRecycler.setLayoutManager(new LinearLayoutManager(UnibookApplication.getInstance()));
+        if (reservations.isEmpty()) {
+            noReservationsText.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -94,21 +102,24 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(com.fargutuvictoria.commons.R.string.are_you_sure)
-                        .setPositiveButton(com.fargutuvictoria.commons.R.string.yes, new DialogInterface.OnClickListener() {
+                builder.setMessage(R.string.are_you_sure)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 myReservationsPresenter.cancelReservation(reservation.getId());
+                                myReservationsPresenter.loadReservations();
                                 reservationQuickView.setVisibility(View.GONE);
                             }
                         })
-                        .setNegativeButton(com.fargutuvictoria.commons.R.string.no, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
                             }
                         });
-                builder.create();
-                builder.show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
             }
         });
 
