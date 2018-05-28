@@ -21,6 +21,9 @@ import com.fargutuvictoria.unibook.ui.reservation.adapter.ReservationFragmentPag
 public class ReservationActivity extends AppCompatActivity {
     private TabLayout tabLayout;
 
+    private String fromFilter;
+    private Classroom classroom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +50,8 @@ public class ReservationActivity extends AppCompatActivity {
         final LinearLayout reservationQuickView = findViewById(R.id.reservation_quick_view);
 
         Intent intent = getIntent();
-        final String fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
-        final Classroom classroom = (Classroom) intent.getSerializableExtra("classroom");
+        fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
+        classroom = (Classroom) intent.getSerializableExtra("classroom");
 
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override

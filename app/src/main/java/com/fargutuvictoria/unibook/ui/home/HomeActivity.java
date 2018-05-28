@@ -1,5 +1,7 @@
 package com.fargutuvictoria.unibook.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -82,7 +84,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.profile:
                 return true;
             case R.id.log_out:
-                presenter.logout();
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage(com.fargutuvictoria.commons.R.string.are_you_sure)
+                        .setPositiveButton(com.fargutuvictoria.commons.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                presenter.logout();
+                            }
+                        })
+                        .setNegativeButton(com.fargutuvictoria.commons.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+                builder.create();
+                builder.show();
                 return true;
             default:
                 drawerLayout.closeDrawer(GravityCompat.START);

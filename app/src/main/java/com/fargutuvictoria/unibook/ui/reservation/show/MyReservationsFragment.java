@@ -1,5 +1,7 @@
 package com.fargutuvictoria.unibook.ui.reservation.show;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,9 +20,9 @@ import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.ui.reservation.adapter.ReservationListViewAdapter;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class MyReservationsFragment extends Fragment implements MyReservationsContract.Fragment {
     private MyReservationsPresenter myReservationsPresenter;
@@ -72,14 +74,10 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
 
     @Override
     public void openReservationQuickView(final Reservation reservation) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date(reservation.getDate()));
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
-        String date = "" + day + " " + month + " " + year;
+        String myFormat = "dd/MM/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        reservationQuickDate.setText(sdf.format(reservation.getDate()));
         reservationQuickClassroom.setText(reservation.getClassroom().getName());
-        reservationQuickDate.setText(date);
         reservationQuickHour.setText(reservation.getHour());
         reservationQuickDay.setText(reservation.getDay().name());
         reservationQuickWeekType.setText(reservation.getWeekType().name());
@@ -95,7 +93,22 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         cancelReservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myReservationsPresenter.cancelReservation(reservation.getId());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(com.fargutuvictoria.commons.R.string.are_you_sure)
+                        .setPositiveButton(com.fargutuvictoria.commons.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                myReservationsPresenter.cancelReservation(reservation.getId());
+                                reservationQuickView.setVisibility(View.GONE);
+                            }
+                        })
+                        .setNegativeButton(com.fargutuvictoria.commons.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+                builder.create();
+                builder.show();
             }
         });
 

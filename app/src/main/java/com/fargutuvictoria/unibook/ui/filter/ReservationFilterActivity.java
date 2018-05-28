@@ -492,7 +492,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         ArrayAdapter<Subgroup> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Subgroup.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         studentsSubgroupSpinner.setAdapter(adapter);
-        studentsSubgroupSpinner.setSelection(0, true);
+        studentsSubgroupSpinner.setSelection(1, true);
 
         studentsSubgroupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

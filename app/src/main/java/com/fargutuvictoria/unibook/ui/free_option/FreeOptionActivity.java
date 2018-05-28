@@ -92,6 +92,8 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                     reservation.setSubgroup((Subgroup) subgroupsSpinner.getSelectedItem());
                 }
                 presenter.makeReservation(reservation);
+                makeReservationButton.setEnabled(false);
+                makeReservationButton.setBackgroundColor(getResources().getColor(R.color.darkGray));
             }
         });
     }
@@ -185,6 +187,7 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent(this, ReservationActivity.class);
+                intent.putExtra("classroom", freeOption.getClassroom());
                 startActivity(intent);
                 return true;
             default:

@@ -45,6 +45,7 @@ public class MyReservationsPresenter implements MyReservationsContract.Presenter
     @Override
     public void onCancelReservationsSuccess() {
         Toast.makeText(UnibookApplication.getInstance(), "Reservation canceled!", Toast.LENGTH_LONG).show();
+        loadReservations();
     }
 
     @Override

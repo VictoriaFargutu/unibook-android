@@ -10,9 +10,9 @@ import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.ui.reservation.show.MyReservationsContract;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ReservationListViewAdapter extends RecyclerView.Adapter<ReservationListViewAdapter.ReservationViewHolder> {
     private List<Reservation> reservations;
@@ -62,13 +62,9 @@ public class ReservationListViewAdapter extends RecyclerView.Adapter<Reservation
             if (reservation.getClassroom() != null) {
                 reservationClassroom.setText(reservation.getClassroom().getName());
             }
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date(reservation.getDate()));
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            int month = calendar.get(Calendar.MONTH);
-            int year = calendar.get(Calendar.YEAR);
-            String date = "" + day + " " + month + " " + year;
-            reservationDate.setText(date);
+            String myFormat = "dd/MM/yy";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            reservationDate.setText(sdf.format(reservation.getDate()));
 
             this.reservation = reservation;
         }
