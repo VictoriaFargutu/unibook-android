@@ -18,6 +18,7 @@ import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.home.adapter.HomeFragmentPagerAdapter;
 import com.fargutuvictoria.unibook.ui.login.LoginActivity;
+import com.fargutuvictoria.unibook.ui.profile.MyProfileActivity;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeContract.View {
@@ -82,6 +83,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.notification:
                 return true;
             case R.id.profile:
+                Intent intent2 = new Intent(HomeActivity.this, MyProfileActivity.class);
+                startActivity(intent2);
                 return true;
             case R.id.log_out:
                 AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);

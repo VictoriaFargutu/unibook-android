@@ -27,7 +27,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.reservation.ReservationActivity" />
         <activity android:name=".ui.filter.ReservationFilterActivity" />
-        <activity android:name=".ui.free_option.FreeOptionActivity"></activity>
+        <activity android:name=".ui.free_option.FreeOptionActivity" />
+        <activity android:name=".ui.profile.MyProfileActivity"></activity>
     </application>
 
 </manifest>
