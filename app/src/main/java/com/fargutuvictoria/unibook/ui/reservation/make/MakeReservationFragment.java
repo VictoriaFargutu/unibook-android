@@ -38,7 +38,7 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
         Intent intent = getActivity().getIntent();
         Classroom classroom = (Classroom) intent.getSerializableExtra("classroom");
         Filter filter = (Filter) intent.getSerializableExtra("filter");
-        if (classroom != null) {
+        if (classroom != null && filter == null) {
             makeReservationPresenter.loadFreeOptionsByClassroom(classroom);
         } else if (filter != null) {
             makeReservationPresenter.loadFreeOptionsByFilter(filter);

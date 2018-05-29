@@ -107,15 +107,12 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         initializeCheckBoxes();
 
         reservationFilterPresenter = new ReservationFilterPresenter(this);
-        reservationFilterPresenter.loadStudentsGroups();
 
         showClassroomTypes();
         showDays();
         showWeekTypes();
         showHours();
         showYear();
-        showSpecializations();
-//        showStudentsGroups();
         showSubgroups();
 
         calendar = Calendar.getInstance();
@@ -301,7 +298,6 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                     intent.putExtra("toFilterFrom", fromFilter);
                     intent.putExtra("filter", filter);
                     startActivity(intent);
-                    //TODO make request
                 }
             }
         });
@@ -415,6 +411,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(adapter);
         yearSpinner.setSelection(0, true);
+        showSpecializations();
 
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -445,18 +442,12 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         specializationSpinner.setAdapter(adapter);
         specializationSpinner.setSelection(0, true);
+        reservationFilterPresenter.loadStudentsGroups();
 
         specializationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO change other spinners items
-                List<StudentsGroup> studentsGroupsbySpecialization = new ArrayList<>();
-                for (StudentsGroup studentsGroup : studentsGroups) {
-                    if (studentsGroup.getSpecialization().equals(specializationSpinner.getSelectedItem())) {
-                        studentsGroupsbySpecialization.add(studentsGroup);
-                    }
-                }
-                showStudentsGroups(studentsGroupsbySpecialization);
+                reservationFilterPresenter.loadStudentsGroups();
             }
 
             @Override
@@ -468,9 +459,13 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
     @Override
     public void showStudentsGroups(List<StudentsGroup> studentsGroups) {
-        this.studentsGroups = studentsGroups;
-        //TODO
-        ArrayAdapter<StudentsGroup> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroups);
+        List<StudentsGroup> studentsGroupsbyYearAndSpecialization = new ArrayList<>();
+        for (StudentsGroup studentsGroup : studentsGroups) {
+            if (studentsGroup.getYear().equals(yearSpinner.getSelectedItem().toString()) && studentsGroup.getSpecialization().equals(specializationSpinner.getSelectedItem())) {
+                studentsGroupsbyYearAndSpecialization.add(studentsGroup);
+            }
+        }
+        ArrayAdapter<StudentsGroup> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroupsbyYearAndSpecialization);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         studentsGroupSpinner.setAdapter(adapter);
         studentsGroupSpinner.setSelection(0, true);
