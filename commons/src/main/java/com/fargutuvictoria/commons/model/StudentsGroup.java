@@ -3,7 +3,9 @@ package com.fargutuvictoria.commons.model;
 
 import com.fargutuvictoria.commons.model.commons.Specialization;
 
-public class StudentsGroup {
+import java.io.Serializable;
+
+public class StudentsGroup implements Serializable{
     private Long id;
     private String name;
     private String year;

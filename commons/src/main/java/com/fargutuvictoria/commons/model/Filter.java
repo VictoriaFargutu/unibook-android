@@ -14,7 +14,7 @@ public class Filter implements Serializable{
     private ClassroomType classroomType;
     private WeekType weekType;
     private Day day;
-    private Date date;
+    private Long date;
     private String hour;
     private String year;
     private Specialization specialization;
@@ -53,11 +53,11 @@ public class Filter implements Serializable{
         this.day = day;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 

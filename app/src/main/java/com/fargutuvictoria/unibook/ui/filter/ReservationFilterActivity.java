@@ -225,7 +225,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             ClassroomType classroomType = null;
             Day day = null;
             WeekType weekType = null;
-            Date date = null;
+            Long date = null;
             String hour = null;
             Integer year = null;
             Specialization specialization = null;
@@ -249,7 +249,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                         count++;
                     }
                     if (dateCheckBox.isChecked()) {
-                        date = calendar.getTime();
+                        date = calendar.getTime().getTime();
                         count++;
                     }
                     if (hourCheckBox.isChecked()) {
@@ -535,6 +535,11 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         tempCalendar.set(Calendar.HOUR, Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2)));
         if (dateCheckBox.isChecked() && tempCalendar.getTime().before(new Date())) {
             Toast.makeText(UnibookApplication.getInstance(), "Please introduce a valid date, today or after:))!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (studentsSubgroupCheckBox.isChecked() && !studentsGroupCheckBox.isChecked()) {
+            Toast.makeText(UnibookApplication.getInstance(), "Please select students group and check the checkbox!", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
