@@ -26,7 +26,12 @@ public class MakeReservationPresenter implements MakeReservationContract.Present
 
     @Override
     public void onArrowClick(FreeOption freeOption) {
-        fragment.openFreeOptionActivity(freeOption);
+        if (freeOption.getDate() != null) {
+            fragment.openFreeOptionActivity(freeOption);
+        } else {
+            fragment.openFilterActivity(freeOption);
+            Toast.makeText(UnibookApplication.getInstance(), "You must select the date!", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

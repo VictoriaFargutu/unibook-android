@@ -13,6 +13,7 @@ public interface MakeReservationContract {
         void showOptionsLoaded(List<FreeOption> freeOptions);
 
         void openFreeOptionActivity(FreeOption freeOption);
+        void openFilterActivity(FreeOption freeOption);
     }
 
     interface Presenter extends ActionHandler {

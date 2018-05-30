@@ -72,7 +72,8 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
     private List<StudentsGroup> studentsGroups;
     private Classroom classroom;
     private String fromFilter;
-    private Filter filter = new Filter();
+    private Filter filter;
+    private Filter extraFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             classroomTypeLayout.setVisibility(View.GONE);
         }
         classroom = (Classroom) intent.getSerializableExtra("classroom");
+        extraFilter = (Filter) intent.getSerializableExtra("filter");
 
         dateEditText = findViewById(R.id.date_picker);
         classroomTypeSpinner = findViewById(R.id.classroom_type_spinner);
@@ -105,6 +107,37 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         applyButton = findViewById(R.id.filters_apply_button);
 
         initializeCheckBoxes();
+
+        if (extraFilter != null) {
+
+            if (extraFilter.getClassroomType() != null) {
+                classroomTypeCheckBox.setChecked(true);
+            }
+            if (extraFilter.getWeekType() != null) {
+                weekTypeCheckBox.setChecked(true);
+            }
+            if (extraFilter.getDay() != null) {
+                dayCheckBox.setChecked(true);
+            }
+            if (extraFilter.getDate() != null) {
+                dateCheckBox.setChecked(true);
+            }
+            if (extraFilter.getHour() != null) {
+                hourCheckBox.setChecked(true);
+            }
+            if (extraFilter.getYear() != null) {
+                yearCheckBox.setChecked(true);
+            }
+            if (extraFilter.getSpecialization() != null) {
+                specializationCheckBox.setChecked(true);
+            }
+            if (extraFilter.getStudentsGroup() != null) {
+                studentsGroupCheckBox.setChecked(true);
+            }
+            if (extraFilter.getSubgroup() != null) {
+                studentsSubgroupCheckBox.setChecked(true);
+            }
+        }
 
         reservationFilterPresenter = new ReservationFilterPresenter(this);
 
@@ -235,6 +268,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             @Override
             public void onClick(View view) {
                 int count = 0;
+                filter = new Filter();
                 if (validateFilters()) {
                     if (classroomTypeCheckBox.isChecked()) {
                         classroomType = (ClassroomType) classroomTypeSpinner.getSelectedItem();
@@ -288,6 +322,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                     filter.setSubgroup(studentsSubgroup);
                     if (count == 0) {
                         // make request without any filter(go back to how it was)
+                        ReservationFilterActivity.this.finish();
                         Intent intent = new Intent(ReservationFilterActivity.this, ReservationActivity.class);
                         intent.putExtra("classroom", classroom);
                         intent.putExtra("toFilterFrom", fromFilter);
@@ -518,6 +553,10 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             Toast.makeText(UnibookApplication.getInstance(), "Please select the date or uncheck this filter!", Toast.LENGTH_LONG).show();
             return false;
         }
+        if (dayCheckBox.isChecked() && !dateCheckBox.isChecked()) {
+            Toast.makeText(UnibookApplication.getInstance(), "Please select the date!", Toast.LENGTH_LONG).show();
+            return false;
+        }
         Day currentDay = initializeCurrentDay();
         if (dayCheckBox.isChecked() && dateCheckBox.isChecked() && dateEditText.getText().toString().matches(".*\\d+.*")) {
             if (!daySpinner.getSelectedItem().equals(currentDay)) {
@@ -525,12 +564,18 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                 return false;
             }
         }
+
+        Calendar tempCalendar = Calendar.getInstance();
+        tempCalendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
+        tempCalendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE));
+        tempCalendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND));
+        tempCalendar.set(Calendar.MILLISECOND, calendar.get(Calendar.MILLISECOND));
+
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-        if (hourCheckBox.isChecked() && currentHour >= Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2))) {
+        if (dateCheckBox.isChecked() && calendar.getTime().equals(tempCalendar.getTime()) && hourCheckBox.isChecked() && currentHour >= Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2))) {
             Toast.makeText(UnibookApplication.getInstance(), "Please introduce a valid time!", Toast.LENGTH_LONG).show();
             return false;
         }
-        Calendar tempCalendar = Calendar.getInstance();
         tempCalendar.setTime(calendar.getTime());
         tempCalendar.set(Calendar.HOUR, Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2)));
         if (dateCheckBox.isChecked() && tempCalendar.getTime().before(new Date())) {

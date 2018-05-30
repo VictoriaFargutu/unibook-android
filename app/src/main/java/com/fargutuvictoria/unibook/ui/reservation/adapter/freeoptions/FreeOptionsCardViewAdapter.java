@@ -73,16 +73,18 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
             freeOptionClassroom.setText(freeOption.getClassroom().getName());
             classroomType.setText(freeOption.getClassroom().getType());
 
-            String myFormat = "dd/MM/yy";
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-            date.setText(sdf.format(freeOption.getDate()));
+            if (freeOption.getDate() != null) {
+                String myFormat = "dd/MM/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                date.setText(sdf.format(freeOption.getDate()));
+            }
             weekType.setText(freeOption.getWeekType().name());
             day.setText(freeOption.getDay().name());
             hour.setText(freeOption.getHour());
             if (freeOption.getStudentsGroup() != null) {
                 studentsGroup.setText(freeOption.getStudentsGroup().getName());
             } else {
-                studentsGroup.setText("");
+                studentsGroup.setText("-");
             }
             this.freeOption = freeOption;
         }
