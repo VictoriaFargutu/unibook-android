@@ -100,8 +100,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                             }
                         });
-                builder.create();
-                builder.show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
                 return true;
             default:
                 drawerLayout.closeDrawer(GravityCompat.START);

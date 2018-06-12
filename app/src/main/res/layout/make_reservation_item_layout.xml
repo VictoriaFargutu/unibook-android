@@ -9,7 +9,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view_free_reservation"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         android:layout_gravity="center"
         android:elevation="2dp"
         android:padding="8dp"
@@ -112,6 +112,30 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/free_reservation_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Year: "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/free_reservation_specialization"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Specialization: "
+                        android:textAlignment="center"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/free_reservation_students_group"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -119,10 +143,11 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:id="@+id/free_reservation_students_group"
+                        android:id="@+id/free_reservation_subgroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
+                        android:text="Subgroup: "
                         android:textAlignment="center"
                         android:textSize="14sp" />
                 </LinearLayout>

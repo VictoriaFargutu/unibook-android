@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.commons.model.Filter;
+import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.commons.TabConstants;
 import com.fargutuvictoria.unibook.ui.filter.ReservationFilterActivity;
@@ -25,6 +26,7 @@ public class ReservationActivity extends AppCompatActivity {
     private String fromFilter;
     private Classroom classroom;
     private Filter filter;
+    private FreeOption freeOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

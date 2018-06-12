@@ -47,7 +47,10 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
         private final TextView weekType;
         private final TextView day;
         private final TextView hour;
+        private final TextView year;
+        private final TextView specialization;
         private final TextView studentsGroup;
+        private final TextView subgroup;
 
         private FreeOption freeOption;
 
@@ -59,7 +62,10 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
             weekType = itemView.findViewById(R.id.free_reservation_week_type);
             day = itemView.findViewById(R.id.free_reservation_day);
             hour = itemView.findViewById(R.id.free_reservation_hour);
+            year = itemView.findViewById(R.id.free_reservation_year);
+            specialization = itemView.findViewById(R.id.free_reservation_specialization);
             studentsGroup = itemView.findViewById(R.id.free_reservation_students_group);
+            subgroup = itemView.findViewById(R.id.free_reservation_subgroup);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,11 +87,29 @@ public class FreeOptionsCardViewAdapter extends RecyclerView.Adapter<FreeOptions
             weekType.setText(freeOption.getWeekType().name());
             day.setText(freeOption.getDay().name());
             hour.setText(freeOption.getHour());
+            if (freeOption.getYear() != null) {
+                year.setText("Year: " + freeOption.getYear());
+            } else {
+                year.setText("Year: -");
+            }
+
+            if (freeOption.getSpecialization() != null) {
+                specialization.setText(freeOption.getSpecialization().name());
+            } else {
+                specialization.setText("Specialization: -");
+            }
+
             if (freeOption.getStudentsGroup() != null) {
                 studentsGroup.setText(freeOption.getStudentsGroup().getName());
             } else {
-                studentsGroup.setText("-");
+                studentsGroup.setText("Group: -");
             }
+            if (freeOption.getSubgroup() != null) {
+                subgroup.setText(freeOption.getSubgroup().name());
+            } else {
+                subgroup.setText("Subgroup: -");
+            }
+
             this.freeOption = freeOption;
         }
     }

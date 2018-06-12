@@ -18,6 +18,7 @@ import com.fargutuvictoria.commons.model.Filter;
 import com.fargutuvictoria.commons.model.FreeOption;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
+import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.filter.ReservationFilterActivity;
 import com.fargutuvictoria.unibook.ui.free_option.FreeOptionActivity;
 import com.fargutuvictoria.unibook.ui.reservation.adapter.freeoptions.FreeOptionsCardViewAdapter;
@@ -29,6 +30,8 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
     private RecyclerView recyclerView;
 
     private TextView noFreeOptionsText;
+    private String fromFilter;
+    private Filter filter;
 
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -45,8 +48,9 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
 
         Intent intent = getActivity().getIntent();
         Classroom classroom = (Classroom) intent.getSerializableExtra("classroom");
-        Filter filter = (Filter) intent.getSerializableExtra("filter");
-        if (classroom != null && filter == null) {
+        filter = (Filter) intent.getSerializableExtra("filter");
+        fromFilter = (String) intent.getSerializableExtra("toFilterFrom");
+        if (classroom != null && !fromFilter.equals(ToFilterFrom.FROM_HOME) && filter == null) {
             makeReservationPresenter.loadFreeOptionsByClassroom(classroom);
         } else if (filter != null) {
             makeReservationPresenter.loadFreeOptionsByFilter(filter);
@@ -58,7 +62,9 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
     @Override
     public void openFreeOptionActivity(FreeOption freeOption) {
         Intent intent = new Intent(getActivity(), FreeOptionActivity.class);
+        intent.putExtra("toFilterFrom", fromFilter);
         intent.putExtra("freeOption", freeOption);
+        intent.putExtra("filter", filter);
         startActivity(intent);
     }
 
@@ -66,6 +72,7 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
     public void openFilterActivity(FreeOption freeOption) {
         Intent intent = new Intent(getActivity(), ReservationFilterActivity.class);
         intent.putExtra("classroom", freeOption.getClassroom());
+        intent.putExtra("toFilterFrom", fromFilter);
         startActivity(intent);
     }
 

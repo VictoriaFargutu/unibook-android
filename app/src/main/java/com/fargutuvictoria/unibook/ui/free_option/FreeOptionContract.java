@@ -10,6 +10,10 @@ public interface FreeOptionContract {
     interface View {
         void showCourses(List<Course> courses);
 
+        void showYear();
+
+        void showSpecializations();
+
         void showStudentsGroups(List<StudentsGroup> studentsGroups);
 
         void showSubgroups();
@@ -17,7 +21,9 @@ public interface FreeOptionContract {
 
     interface Presenter {
         void loadCourses();
+
         void loadStudentsGroups();
+
         void makeReservation(Reservation reservation);
     }
 }

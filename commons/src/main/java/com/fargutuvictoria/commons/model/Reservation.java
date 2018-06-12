@@ -1,6 +1,7 @@
 package com.fargutuvictoria.commons.model;
 
 import com.fargutuvictoria.commons.model.commons.Day;
+import com.fargutuvictoria.commons.model.commons.Specialization;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.commons.model.commons.WeekType;
 
@@ -14,6 +15,8 @@ public class Reservation {
     private Subgroup subgroup;
     private Classroom classroom;
     private Course course;
+    private String year;
+    private Specialization specialization;
     private WeekType weekType;
     private Day day;
     private Long date;
@@ -58,6 +61,22 @@ public class Reservation {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
     }
 
     public WeekType getWeekType() {

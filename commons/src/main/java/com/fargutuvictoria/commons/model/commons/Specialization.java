@@ -1,5 +1,5 @@
 package com.fargutuvictoria.commons.model.commons;
 
 public enum Specialization {
-    MI, I, IA, IAG, SMFA, TIN, TMIS, MITB
+    You_Can_Choose, MI, I, IA, IAG, SMFA, TIN, TMIS, MITB
 }

@@ -75,6 +75,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
     private Filter filter;
     private Filter extraFilter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -327,12 +328,13 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
                         intent.putExtra("classroom", classroom);
                         intent.putExtra("toFilterFrom", fromFilter);
                         startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(ReservationFilterActivity.this, ReservationActivity.class);
+                        intent.putExtra("classroom", classroom);
+                        intent.putExtra("toFilterFrom", fromFilter);
+                        intent.putExtra("filter", filter);
+                        startActivity(intent);
                     }
-                    Intent intent = new Intent(ReservationFilterActivity.this, ReservationActivity.class);
-                    intent.putExtra("classroom", classroom);
-                    intent.putExtra("toFilterFrom", fromFilter);
-                    intent.putExtra("filter", filter);
-                    startActivity(intent);
                 }
             }
         });

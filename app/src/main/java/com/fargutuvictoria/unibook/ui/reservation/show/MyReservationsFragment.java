@@ -35,8 +35,10 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
     private TextView reservationQuickCourse;
     private TextView reservationQuickHour;
     private TextView reservationQuickDate;
-    private TextView reservationQuickStudentsGroup;
     private TextView reservationQuickStudentsYear;
+    private TextView reservationQuickSpecialization;
+    private TextView reservationQuickStudentsGroup;
+    private TextView reservationQuickSubgroup;
     private Button cancelReservationButton;
     private Button closeQuickViewButton;
 
@@ -59,6 +61,8 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         reservationQuickDate = reservationQuickView.findViewById(R.id.reservation_quick_date);
         reservationQuickStudentsGroup = reservationQuickView.findViewById(R.id.reservation_quick_students_group);
         reservationQuickStudentsYear = reservationQuickView.findViewById(R.id.reservation_quick_students_year);
+        reservationQuickSpecialization = reservationQuickView.findViewById(R.id.reservation_quick_specialization);
+        reservationQuickSubgroup = reservationQuickView.findViewById(R.id.reservation_quick_subgroup);
         cancelReservationButton = reservationQuickView.findViewById(R.id.quick_cancel_reservation);
         closeQuickViewButton = reservationQuickView.findViewById(R.id.close_button);
 
@@ -92,9 +96,22 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         if (reservation.getCourse() != null) {
             reservationQuickCourse.setText(reservation.getCourse().getName());
         }
+        if (reservation.getYear() != null) {
+            reservationQuickStudentsYear.setText(reservation.getYear());
+        }
+        if (reservation.getSpecialization() != null) {
+            reservationQuickCourse.setText(reservation.getSpecialization().name());
+        }
+        if (reservation.getCourse() != null) {
+            reservationQuickCourse.setText(reservation.getCourse().getName());
+        }
         if (reservation.getStudentsGroup() != null) {
             reservationQuickStudentsGroup.setText(reservation.getStudentsGroup().getName());
             reservationQuickStudentsYear.setText("Year: " + reservation.getStudentsGroup().getYear());
+            reservationQuickSubgroup.setText(reservation.getSubgroup().name());
+        }
+        if (reservation.getSubgroup() != null) {
+            reservationQuickCourse.setText(reservation.getSubgroup().name());
         }
         reservationQuickView.setVisibility(View.VISIBLE);
 

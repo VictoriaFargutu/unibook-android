@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fargutuvictoria.unibook">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".UnibookApplication"
         android:allowBackup="true"
@@ -31,5 +36,6 @@
         <activity android:name=".ui.free_option.FreeOptionActivity" />
         <activity android:name=".ui.profile.MyProfileActivity"></activity>
     </application>
+
 
 </manifest>
