@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fargutuvictoria.commons.model.Course;
 import com.fargutuvictoria.commons.model.Filter;
@@ -26,6 +27,7 @@ import com.fargutuvictoria.commons.model.StudentsGroup;
 import com.fargutuvictoria.commons.model.commons.Specialization;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.unibook.R;
+import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 import java.text.SimpleDateFormat;
@@ -52,6 +54,8 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
     private FreeOption freeOption;
     private Filter filter;
+
+    private Reservation reservation = new Reservation();
 
     public static String YOU_CAN_CHOOSE = "You_Can_Choose";
 
@@ -100,7 +104,6 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         makeReservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Reservation reservation = new Reservation();
                 reservation.setClassroom(freeOption.getClassroom());
                 reservation.setDate(freeOption.getDate().getTime());
                 reservation.setWeekType(freeOption.getWeekType());
@@ -142,8 +145,19 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         sendEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                String groupEmail = "g" + freeOption.getStudentsGroup().getName().toLowerCase() + "@student.unitbv.ro";
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Recuperare");
+//                emailIntent.putExtra(Intent.EXTRA_TEXT, "Dragi studenti, tin sa va anunt ca recuperarea va avea loc la data de " + reservation.getDate() + ", ora " + reservation.getHour() + ", in sala " + reservation.getClassroom());
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body of email");
+                StudentsGroup studentsGroup = freeOption.getStudentsGroup();
+                if (studentsGroup == null) {
+                    if (((StudentsGroup) groupsSpinner.getSelectedItem()).getName() != null) {
+                        studentsGroup = ((StudentsGroup) groupsSpinner.getSelectedItem());
+                    }
+                }
+//                String groupEmail = "g" + studentsGroup.getName().toLowerCase() + "@student.unitbv.ro";
+                String groupEmail = "1.b@gmail.com";
                 emailIntent.setData(Uri.parse("mailto:" + groupEmail));
                 try {
                     startActivity(emailIntent);
@@ -217,10 +231,6 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         yearsSpinner.setAdapter(adapter);
         if (freeOption.getYear() != null) {
             yearsSpinner.setSelection(years.indexOf(Integer.parseInt(freeOption.getYear())));
-            RelativeLayout.LayoutParams ll = (RelativeLayout.LayoutParams) makeReservationButton.getLayoutParams();
-            ll.addRule(RelativeLayout.ALIGN_PARENT_START);
-            makeReservationButton.setLayoutParams(ll);
-            sendEmailButton.setVisibility(View.VISIBLE);
         } else {
             yearsSpinner.setSelection(0, true);
         }
@@ -229,7 +239,6 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         yearsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO change other spinners items
                 showSpecializations();
             }
 
@@ -260,10 +269,6 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
             for (int i = 0; i < specializations.length; i++) {
                 if (specializations[i].name().equals(freeOption.getSpecialization().name())) {
                     specializationsSpinner.setSelection(i);
-                    RelativeLayout.LayoutParams ll = (RelativeLayout.LayoutParams) makeReservationButton.getLayoutParams();
-                    ll.addRule(RelativeLayout.ALIGN_PARENT_START);
-                    makeReservationButton.setLayoutParams(ll);
-                    sendEmailButton.setVisibility(View.VISIBLE);
                     break;
                 }
             }
@@ -287,15 +292,21 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
     @Override
     public void showStudentsGroups(List<StudentsGroup> studentsGroups) {
-        ArrayAdapter<StudentsGroup> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
+        ArrayAdapter<StudentsGroup> adapter;
         StudentsGroup defaultNoSelection = new StudentsGroup();
         defaultNoSelection.setName(YOU_CAN_CHOOSE);
         if (freeOption.getStudentsGroup() == null) {
             List<StudentsGroup> studentsGroupsbyYearAndSpecialization = new ArrayList<>();
             studentsGroupsbyYearAndSpecialization.add(0, defaultNoSelection);
             for (StudentsGroup studentsGroup : studentsGroups) {
-                if (studentsGroup.getYear().equals(yearsSpinner.getSelectedItem().toString()) && studentsGroup.getSpecialization().equals(specializationsSpinner.getSelectedItem())) {
-                    studentsGroupsbyYearAndSpecialization.add(studentsGroup);
+                if (((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE)) {
+                    if (studentsGroup.getYear().equals(yearsSpinner.getSelectedItem().toString())) {
+                        studentsGroupsbyYearAndSpecialization.add(studentsGroup);
+                    }
+                } else {
+                    if (studentsGroup.getYear().equals(yearsSpinner.getSelectedItem().toString()) && studentsGroup.getSpecialization().equals(specializationsSpinner.getSelectedItem())) {
+                        studentsGroupsbyYearAndSpecialization.add(studentsGroup);
+                    }
                 }
             }
             adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroupsbyYearAndSpecialization);
@@ -307,10 +318,6 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         groupsSpinner.setAdapter(adapter);
         if (freeOption.getStudentsGroup() != null) {
             groupsSpinner.setSelection(studentsGroups.indexOf(freeOption.getStudentsGroup()));
-            RelativeLayout.LayoutParams ll = (RelativeLayout.LayoutParams) makeReservationButton.getLayoutParams();
-            ll.addRule(RelativeLayout.ALIGN_PARENT_START);
-            makeReservationButton.setLayoutParams(ll);
-            sendEmailButton.setVisibility(View.VISIBLE);
         } else {
             groupsSpinner.setSelection(0);
         }
@@ -350,6 +357,17 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
             }
         });
+    }
+
+    @Override
+    public void onCreateReservationSucces() {
+        Toast.makeText(UnibookApplication.getInstance(), "Reservation created!", Toast.LENGTH_SHORT).show();
+        if (!yearsSpinner.getSelectedItem().equals(0) || !((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE) || !((StudentsGroup) groupsSpinner.getSelectedItem()).getName().equals(YOU_CAN_CHOOSE)) {
+            RelativeLayout.LayoutParams ll = (RelativeLayout.LayoutParams) makeReservationButton.getLayoutParams();
+            ll.addRule(RelativeLayout.ALIGN_PARENT_START);
+            makeReservationButton.setLayoutParams(ll);
+            sendEmailButton.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

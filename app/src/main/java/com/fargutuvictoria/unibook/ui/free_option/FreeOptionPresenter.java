@@ -63,7 +63,7 @@ public class FreeOptionPresenter implements FreeOptionContract.Presenter, GetGro
 
     @Override
     public void onCreateReservationsSuccess(Reservation reservation) {
-        Toast.makeText(UnibookApplication.getInstance(), "Reservation created!", Toast.LENGTH_SHORT).show();
+        view.onCreateReservationSucces();
     }
 
     @Override

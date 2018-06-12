@@ -17,6 +17,8 @@ public interface FreeOptionContract {
         void showStudentsGroups(List<StudentsGroup> studentsGroups);
 
         void showSubgroups();
+
+        void onCreateReservationSucces();
     }
 
     interface Presenter {
