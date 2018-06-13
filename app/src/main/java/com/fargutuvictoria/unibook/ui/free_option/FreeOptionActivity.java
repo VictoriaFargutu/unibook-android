@@ -1,12 +1,9 @@
 package com.fargutuvictoria.unibook.ui.free_option;
 
-import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -150,12 +147,17 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setType("text/plain");
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Recuperare");
-//                emailIntent.putExtra(Intent.EXTRA_TEXT, "data de " + reservation.getDate() + ", ora " + reservation.getHour() + ", in sala " + reservation.getClassroom());
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body of email");
+
+                String myFormat = "dd/MM";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String date = sdf.format(reservation.getDate());
+
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Data: " + date + "\n Ora: " + reservation.getHour() + "\n Sala: " + reservation.getClassroom().getName());
+
                 List<String> groups = new ArrayList<>();
                 StudentsGroup studentsGroup = freeOption.getStudentsGroup();
                 if (studentsGroup == null) {
-                    if (((StudentsGroup) groupsSpinner.getSelectedItem()).getName() != null) {
+                    if (((StudentsGroup) groupsSpinner.getSelectedItem()).getName() != null && !((StudentsGroup) groupsSpinner.getSelectedItem()).getName().equals(YOU_CAN_CHOOSE)) {
                         studentsGroup = ((StudentsGroup) groupsSpinner.getSelectedItem());
                         groups.add("g" + studentsGroup.getName().toLowerCase() + "@student.unitbv.ro");
                     }
@@ -163,7 +165,13 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                     groups.add("g" + studentsGroup.getName().toLowerCase() + "@student.unitbv.ro");
                 }
                 Integer year = (Integer) yearsSpinner.getSelectedItem();
-                if (freeOption.getYear() != null || (year != null && year != 0)) {
+                if (groups.size() == 0 && freeOption.getYear() != null || (year != null && year != 0)) {
+                    for (StudentsGroup studentsGroup1 : studentsGroups) {
+                        groups.add("g" + studentsGroup1.getName().toLowerCase() + "@student.unitbv.ro");
+                    }
+                }
+
+                if (groups.size() == 0 && freeOption.getSpecialization() != null || ((Specialization) specializationsSpinner.getSelectedItem()).name() != null && !((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE)) {
                     for (StudentsGroup studentsGroup1 : studentsGroups) {
                         groups.add("g" + studentsGroup1.getName().toLowerCase() + "@student.unitbv.ro");
                     }
@@ -171,7 +179,6 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                 String[] stringGroups = new String[groups.size()];
                 stringGroups = groups.toArray(stringGroups);
 
-//                String groupEmail = "g" + studentsGroup.getName().toLowerCase() + "@student.unitbv.ro";
                 emailIntent.setData(new Uri.Builder().scheme("mailto").build())
                         .putExtra(Intent.EXTRA_EMAIL, stringGroups);
                 try {
@@ -288,8 +295,7 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
     @Override
     public void showStudentsGroups(List<StudentsGroup> studentsGroups) {
-        this.studentsGroups.addAll(studentsGroups);
-
+        this.studentsGroups.clear();
         ArrayAdapter<StudentsGroup> adapter;
         StudentsGroup defaultNoSelection = new StudentsGroup();
         defaultNoSelection.setName(YOU_CAN_CHOOSE);
@@ -308,6 +314,7 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                 }
             }
             adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroupsbyYearAndSpecialization);
+            this.studentsGroups.addAll(studentsGroupsbyYearAndSpecialization);
         } else if (!((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE) && (Integer) yearsSpinner.getSelectedItem() == 0) {
             List<StudentsGroup> studentsGroupsbyYearAndSpecialization = new ArrayList<>();
             studentsGroupsbyYearAndSpecialization.add(0, defaultNoSelection);
@@ -317,10 +324,13 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                 }
             }
             adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroupsbyYearAndSpecialization);
+            this.studentsGroups.addAll(studentsGroupsbyYearAndSpecialization);
         } else {
             studentsGroups.add(0, defaultNoSelection);
             adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, studentsGroups);
+            this.studentsGroups.addAll(studentsGroups);
         }
+        this.studentsGroups.remove(defaultNoSelection);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         groupsSpinner.setAdapter(adapter);
         if (freeOption.getStudentsGroup() != null) {
