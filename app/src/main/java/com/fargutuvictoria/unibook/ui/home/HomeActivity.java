@@ -80,8 +80,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra("toFilterFrom", ToFilterFrom.FROM_HOME);
                 startActivity(intent);
                 return true;
-            case R.id.notification:
-                return true;
             case R.id.profile:
                 Intent intent2 = new Intent(HomeActivity.this, MyProfileActivity.class);
                 startActivity(intent2);

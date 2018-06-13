@@ -14,11 +14,6 @@
         android:title="Reservations" />
 
     <item
-        android:id="@+id/notification"
-        android:enabled="true"
-        android:title="Notifications" />
-
-    <item
         android:id="@+id/profile"
         android:enabled="true"
         android:title="Profile" />

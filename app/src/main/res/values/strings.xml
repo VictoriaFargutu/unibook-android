@@ -23,4 +23,9 @@
     <string name="close">Close</string>
     <string name="cancel">Cancel</string>
     <string name="change_password">Change Password</string>
+    <string name="course">Course</string>
+    <string name="year">Year:</string>
+    <string name="specialization">Specialization</string>
+    <string name="students_group">Students Group</string>
+    <string name="subgroup">Subgroup:</string>
 </resources>

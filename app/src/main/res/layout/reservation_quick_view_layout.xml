@@ -126,7 +126,7 @@
                 android:paddingEnd="3dp"
                 android:paddingStart="10dp"
                 android:paddingTop="3dp"
-                android:text="Course"
+                android:text="@string/course"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -144,7 +144,7 @@
                     android:background="@drawable/border_background"
                     android:paddingEnd="3dp"
                     android:paddingStart="10dp"
-                    android:text="Year: "
+                    android:text="@string/year"
                     android:textSize="14sp" />
 
                 <TextView
@@ -156,7 +156,7 @@
                     android:background="@drawable/border_background"
                     android:paddingEnd="3dp"
                     android:paddingStart="10dp"
-                    android:text="Specialization"
+                    android:text="@string/specialization"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -176,7 +176,7 @@
                     android:background="@drawable/border_background"
                     android:paddingEnd="3dp"
                     android:paddingStart="10dp"
-                    android:text="Students Group"
+                    android:text="@string/students_group"
                     android:textSize="14sp" />
 
                 <TextView
@@ -188,7 +188,7 @@
                     android:background="@drawable/border_background"
                     android:paddingEnd="3dp"
                     android:paddingStart="10dp"
-                    android:text="Subgroup: "
+                    android:text="@string/subgroup"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -201,31 +201,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:paddingStart="10dp">
+     >
 
         <Button
             android:id="@+id/quick_cancel_reservation"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
             android:layout_height="35dp"
-
             android:layout_marginEnd="12dp"
             android:layout_marginStart="12dp"
             android:background="@color/colorPrimary"
-            android:paddingEnd="5dp"
-            android:paddingStart="5dp"
             android:text="@string/cancel_reservation"
             android:textColor="@color/secondaryTextColor"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/close_button"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
             android:layout_height="35dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginStart="15dp"
+
             android:background="@color/colorPrimary"
-            android:paddingEnd="5dp"
-            android:paddingStart="5dp"
             android:text="@string/close"
             android:textColor="@color/secondaryTextColor"
             android:textSize="12sp" />

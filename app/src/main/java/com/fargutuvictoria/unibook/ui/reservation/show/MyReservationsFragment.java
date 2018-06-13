@@ -93,6 +93,13 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
         reservationQuickHour.setText(reservation.getHour());
         reservationQuickDay.setText(reservation.getDay().name());
         reservationQuickWeekType.setText(reservation.getWeekType().name());
+
+        reservationQuickCourse.setText(R.string.course);
+        reservationQuickStudentsYear.setText(R.string.year);
+        reservationQuickSpecialization.setText(R.string.specialization);
+        reservationQuickStudentsGroup.setText(R.string.students_group);
+        reservationQuickSubgroup.setText(R.string.subgroup);
+
         if (reservation.getCourse() != null) {
             reservationQuickCourse.setText(reservation.getCourse().getName());
         }
@@ -100,18 +107,16 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
             reservationQuickStudentsYear.setText(reservation.getYear());
         }
         if (reservation.getSpecialization() != null) {
-            reservationQuickCourse.setText(reservation.getSpecialization().name());
+            reservationQuickSpecialization.setText(reservation.getSpecialization().name());
         }
-        if (reservation.getCourse() != null) {
-            reservationQuickCourse.setText(reservation.getCourse().getName());
-        }
+
         if (reservation.getStudentsGroup() != null) {
             reservationQuickStudentsGroup.setText(reservation.getStudentsGroup().getName());
             reservationQuickStudentsYear.setText("Year: " + reservation.getStudentsGroup().getYear());
-            reservationQuickSubgroup.setText(reservation.getSubgroup().name());
+            reservationQuickSpecialization.setText(reservation.getStudentsGroup().getSpecialization().name());
         }
         if (reservation.getSubgroup() != null) {
-            reservationQuickCourse.setText(reservation.getSubgroup().name());
+            reservationQuickSubgroup.setText(reservation.getSubgroup().name());
         }
         reservationQuickView.setVisibility(View.VISIBLE);
 
