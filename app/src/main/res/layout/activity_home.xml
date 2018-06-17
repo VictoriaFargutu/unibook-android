@@ -32,7 +32,7 @@
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:navigationIcon="@drawable/ic_menu_black_24dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="@string/app_name"
+                app:title="Home"
                 app:titleTextColor="@color/white" />
 
         </android.support.design.widget.AppBarLayout>

@@ -12,10 +12,6 @@ import com.fargutuvictoria.unibook.R;
 
 import java.util.List;
 
-/**
- * Created by fargutuvictoria on 05/05/2018.
- */
-
 public class ClassroomListViewAdapter extends RecyclerView.Adapter<ClassroomListViewAdapter.ClassroomViewHolder> {
     private List<Classroom> classrooms;
     private ActionHandler actionHandler;

@@ -20,10 +20,6 @@ import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 import java.util.List;
 
-/**
- * Created by fargutuvictoria on 04/05/2018.
- */
-
 public class SeminarRoomFragment extends Fragment implements SeminarRoomContract.Fragment {
     private SeminarRoomPresenter seminarRoomPresenter;
     private RecyclerView classroomsRecycler;

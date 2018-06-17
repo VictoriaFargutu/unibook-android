@@ -1,6 +1,8 @@
 package com.fargutuvictoria.unibook.ui.filter;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.fargutuvictoria.commons.model.Classroom;
 import com.fargutuvictoria.commons.model.Filter;
@@ -28,7 +29,6 @@ import com.fargutuvictoria.commons.model.commons.Specialization;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.commons.model.commons.WeekType;
 import com.fargutuvictoria.unibook.R;
-import com.fargutuvictoria.unibook.UnibookApplication;
 import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
@@ -94,6 +94,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         }
         classroom = (Classroom) intent.getSerializableExtra("classroom");
         extraFilter = (Filter) intent.getSerializableExtra("filter");
+        String warning = intent.getStringExtra("warning");
 
         dateEditText = findViewById(R.id.date_picker);
         classroomTypeSpinner = findViewById(R.id.classroom_type_spinner);
@@ -148,6 +149,10 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         showHours();
         showYear();
         showSubgroups();
+
+        if(warning != null){
+            showMessageDialog(warning);
+        }
 
         calendar = Calendar.getInstance();
 
@@ -453,7 +458,6 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO change other spinners items
                 showSpecializations();
             }
 
@@ -465,7 +469,7 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
     @Override
     public void showSpecializations() {
-        Specialization[] specializations = new Specialization[4];
+        Specialization[] specializations = new Specialization[8];
         if (yearSpinner.getSelectedItem().equals(3)) {
             specializations[0] = Specialization.MI;
             specializations[1] = Specialization.I;
@@ -473,7 +477,11 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
             specializations[3] = Specialization.IAG;
 
         } else {
-            specializations = Specialization.values();
+            Specialization[] temp = Specialization.values();
+            for (int i = 0; i < temp.length - 1; i++) {
+                specializations[i] = temp[i + 1];
+            }
+
         }
         ArrayAdapter<Specialization> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, specializations);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -551,18 +559,22 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
     }
 
     private boolean validateFilters() {
+        String message = null;
         if (dateCheckBox.isChecked() && !dateEditText.getText().toString().matches(".*\\d+.*")) {
-            Toast.makeText(UnibookApplication.getInstance(), "Please select the date or uncheck this filter!", Toast.LENGTH_LONG).show();
+            message = "Please select the date or uncheck this filter!";
+            showMessageDialog(message);
             return false;
         }
         if (dayCheckBox.isChecked() && !dateCheckBox.isChecked()) {
-            Toast.makeText(UnibookApplication.getInstance(), "Please select the date!", Toast.LENGTH_LONG).show();
+            message = "Please select the date!";
+            showMessageDialog(message);
             return false;
         }
         Day currentDay = initializeCurrentDay();
         if (dayCheckBox.isChecked() && dateCheckBox.isChecked() && dateEditText.getText().toString().matches(".*\\d+.*")) {
             if (!daySpinner.getSelectedItem().equals(currentDay)) {
-                Toast.makeText(UnibookApplication.getInstance(), "Please select a valid date, it should match the selected day!", Toast.LENGTH_LONG).show();
+                message = "Please select a valid date, it should match the selected day!";
+                showMessageDialog(message);
                 return false;
             }
         }
@@ -575,18 +587,21 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
 
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         if (dateCheckBox.isChecked() && calendar.getTime().equals(tempCalendar.getTime()) && hourCheckBox.isChecked() && currentHour >= Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2))) {
-            Toast.makeText(UnibookApplication.getInstance(), "Please introduce a valid time!", Toast.LENGTH_LONG).show();
+            message = "Please introduce a valid time!";
+            showMessageDialog(message);
             return false;
         }
         tempCalendar.setTime(calendar.getTime());
         tempCalendar.set(Calendar.HOUR, Integer.valueOf(hourSpinner.getSelectedItem().toString().substring(0, 2)));
         if (dateCheckBox.isChecked() && tempCalendar.getTime().before(new Date())) {
-            Toast.makeText(UnibookApplication.getInstance(), "Please introduce a valid date, today or after:))!", Toast.LENGTH_LONG).show();
+            message = "Please introduce a valid date, it must be today or after today!";
+            showMessageDialog(message);
             return false;
         }
 
         if (studentsSubgroupCheckBox.isChecked() && !studentsGroupCheckBox.isChecked()) {
-            Toast.makeText(UnibookApplication.getInstance(), "Please select students group and check the checkbox!", Toast.LENGTH_LONG).show();
+            message = "Please select students group and check the checkbox!";
+            showMessageDialog(message);
             return false;
         }
         return true;
@@ -612,6 +627,20 @@ public class ReservationFilterActivity extends AppCompatActivity implements Rese
         }
 
         return currentDay;
-
     }
+
+    public void showMessageDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Warning")
+                .setMessage(message)
+                .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
+    }
+
 }

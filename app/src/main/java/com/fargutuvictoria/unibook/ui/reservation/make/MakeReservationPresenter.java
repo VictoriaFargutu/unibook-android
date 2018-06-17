@@ -30,7 +30,6 @@ public class MakeReservationPresenter implements MakeReservationContract.Present
             fragment.openFreeOptionActivity(freeOption);
         } else {
             fragment.openFilterActivity(freeOption);
-            Toast.makeText(UnibookApplication.getInstance(), "You must select the date!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -62,4 +61,5 @@ public class MakeReservationPresenter implements MakeReservationContract.Present
     public void onGetFreeOptionsError(ExceptionInfo exceptionInfo) {
         Toast.makeText(UnibookApplication.getInstance(), exceptionInfo.getMessage(), Toast.LENGTH_LONG).show();
     }
+
 }

@@ -1,5 +1,7 @@
 package com.fargutuvictoria.unibook.ui.profile;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fargutuvictoria.commons.model.ExceptionInfo;
 import com.fargutuvictoria.commons.model.User;
 import com.fargutuvictoria.unibook.R;
 import com.fargutuvictoria.unibook.UnibookApplication;
@@ -74,7 +77,7 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileCon
                 if (passwordText.getText().toString().equals(repeatPasswordText.getText().toString())) {
                     presenter.resetPassword(passwordText.getText().toString());
                 } else {
-                    Toast.makeText(UnibookApplication.getInstance(), "Passwords must be equal!", Toast.LENGTH_LONG).show();
+                    showMessageDialog("Passwords must be equal!");
                 }
             }
         });
@@ -90,7 +93,7 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileCon
 
     @Override
     public void passwordChanged() {
-        Toast.makeText(UnibookApplication.getInstance(), "Password successfully changed!", Toast.LENGTH_LONG).show();
+        showMessageDialog("Password successfully changed!");
         passwordText.setText(R.string.change_password);
         repeatPasswordText.setText("");
         repeatPasswordText.setHint("Repeat Password");
@@ -98,6 +101,11 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileCon
         repeatPasswordTextView.setVisibility(View.GONE);
         changePassword.setVisibility(View.GONE);
 
+    }
+
+    @Override
+    public void passwordChangeError(ExceptionInfo exceptionInfo) {
+        showMessageDialog(exceptionInfo.getMessage());
     }
 
     @Override
@@ -110,5 +118,18 @@ public class MyProfileActivity extends AppCompatActivity implements MyProfileCon
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void showMessageDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
     }
 }

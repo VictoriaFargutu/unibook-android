@@ -26,7 +26,6 @@ public class ReservationActivity extends AppCompatActivity {
     private String fromFilter;
     private Classroom classroom;
     private Filter filter;
-    private FreeOption freeOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class ReservationActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         tabLayout = findViewById(R.id.reservations_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-        //tabLayout.getTabAt(TabConstants.MAKE_RESERVATION_TAB_POSITION).select();
+
         final Button filter_button = findViewById(R.id.filters_button);
         final LinearLayout reservationQuickView = findViewById(R.id.reservation_quick_view);
 

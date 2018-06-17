@@ -73,6 +73,7 @@ public class MakeReservationFragment extends Fragment implements MakeReservation
         Intent intent = new Intent(getActivity(), ReservationFilterActivity.class);
         intent.putExtra("classroom", freeOption.getClassroom());
         intent.putExtra("toFilterFrom", fromFilter);
+        intent.putExtra("warning", "You must select the date!");
         startActivity(intent);
     }
 

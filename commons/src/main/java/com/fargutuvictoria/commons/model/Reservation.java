@@ -5,10 +5,6 @@ import com.fargutuvictoria.commons.model.commons.Specialization;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.commons.model.commons.WeekType;
 
-/**
- * Created by fargutuvictoria on 05/05/2018.
- */
-
 public class Reservation {
     private Long id;
     private StudentsGroup studentsGroup;

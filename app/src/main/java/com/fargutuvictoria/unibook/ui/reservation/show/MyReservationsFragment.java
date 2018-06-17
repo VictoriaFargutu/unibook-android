@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fargutuvictoria.commons.model.Reservation;
 import com.fargutuvictoria.unibook.R;
@@ -151,5 +152,19 @@ public class MyReservationsFragment extends Fragment implements MyReservationsCo
                 reservationQuickView.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void showMessageDialogSucces() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Reservation was canceled!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
     }
 }

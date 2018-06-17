@@ -32,6 +32,6 @@ public class LoginPresenter implements LoginContract.Presenter, LoginInteractor.
 
     @Override
     public void onLoginError(ExceptionInfo exceptionInfo) {
-        Toast.makeText(UnibookApplication.getInstance(), exceptionInfo.getMessage(), Toast.LENGTH_LONG).show();
+        mView.displayError(exceptionInfo);
     }
 }

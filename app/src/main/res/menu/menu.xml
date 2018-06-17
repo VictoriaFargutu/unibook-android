@@ -3,24 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <item
-        android:id="@+id/home"
-        android:enabled="true"
-        android:title="Home" />
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:enabled="true"
+            android:title="Home" />
 
-    <item
-        android:id="@+id/reservation"
-        android:enabled="true"
-        android:title="Reservations" />
+        <item
+            android:id="@+id/reservation"
+            android:enabled="true"
+            android:title="Reservations" />
 
-    <item
-        android:id="@+id/profile"
-        android:enabled="true"
-        android:title="Profile" />
+        <item
+            android:id="@+id/profile"
+            android:enabled="true"
+            android:title="Profile" />
 
-    <item
-        android:id="@+id/log_out"
-        android:enabled="true"
-        android:title="Logout" />
+        <item
+            android:id="@+id/log_out"
+            android:enabled="true"
+            android:title="Logout" />
+    </group>
 
 </menu>

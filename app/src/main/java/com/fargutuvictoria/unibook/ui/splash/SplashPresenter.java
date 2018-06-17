@@ -7,10 +7,6 @@ import com.fargutuvictoria.unibook.network.interactor.session.validation.Session
 import com.fargutuvictoria.unibook.network.interactor.session.validation.SessionValidationInteractorImpl;
 import com.fargutuvictoria.unibook.preferences.SharedPreferencesHandler;
 
-/**
- * Created by fargutuvictoria on 23/02/2018.
- */
-
 public class SplashPresenter implements SplashContract.Presenter, SessionValidationInteractor.Callback {
 
     private SplashContract.View mView;

@@ -28,6 +28,6 @@ public class MyProfilePresenter implements MyProfileContract.Presenter, ResetPas
 
     @Override
     public void onResetPasswordError(ExceptionInfo exceptionInfo) {
-        Toast.makeText(UnibookApplication.getInstance(), exceptionInfo.getMessage(), Toast.LENGTH_LONG).show();
+        view.passwordChangeError(exceptionInfo);
     }
 }

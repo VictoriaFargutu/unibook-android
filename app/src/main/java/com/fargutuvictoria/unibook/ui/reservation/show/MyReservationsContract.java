@@ -10,6 +10,8 @@ public interface MyReservationsContract {
         void showReservationsLoaded(List<Reservation> reservations);
 
         void openReservationQuickView(Reservation reservation);
+
+        void showMessageDialogSucces();
     }
 
     interface Presenter {

@@ -73,7 +73,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // close drawer when item is tapped
         drawerLayout.closeDrawers();
 
-        // Add code here to update the UI based on the item selected
         switch (item.getItemId()) {
             case R.id.reservation:
                 Intent intent = new Intent(HomeActivity.this, ReservationActivity.class);

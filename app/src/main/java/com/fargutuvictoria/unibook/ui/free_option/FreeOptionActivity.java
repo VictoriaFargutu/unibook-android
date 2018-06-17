@@ -1,6 +1,8 @@
 package com.fargutuvictoria.unibook.ui.free_option;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +16,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fargutuvictoria.commons.model.Course;
 import com.fargutuvictoria.commons.model.Filter;
@@ -24,7 +25,7 @@ import com.fargutuvictoria.commons.model.StudentsGroup;
 import com.fargutuvictoria.commons.model.commons.Specialization;
 import com.fargutuvictoria.commons.model.commons.Subgroup;
 import com.fargutuvictoria.unibook.R;
-import com.fargutuvictoria.unibook.UnibookApplication;
+import com.fargutuvictoria.unibook.commons.ToFilterFrom;
 import com.fargutuvictoria.unibook.ui.reservation.ReservationActivity;
 
 import java.text.SimpleDateFormat;
@@ -165,13 +166,13 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
                     groups.add("g" + studentsGroup.getName().toLowerCase() + "@student.unitbv.ro");
                 }
                 Integer year = (Integer) yearsSpinner.getSelectedItem();
-                if (groups.size() == 0 && freeOption.getYear() != null || (year != null && year != 0)) {
+                if (groups.size() == 0 && freeOption.getYear() != null || (groups.size() == 0 && year != null && year != 0)) {
                     for (StudentsGroup studentsGroup1 : studentsGroups) {
                         groups.add("g" + studentsGroup1.getName().toLowerCase() + "@student.unitbv.ro");
                     }
                 }
 
-                if (groups.size() == 0 && freeOption.getSpecialization() != null || ((Specialization) specializationsSpinner.getSelectedItem()).name() != null && !((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE)) {
+                if (groups.size() == 0 && freeOption.getSpecialization() != null || groups.size() == 0 && ((Specialization) specializationsSpinner.getSelectedItem()).name() != null && !((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE)) {
                     for (StudentsGroup studentsGroup1 : studentsGroups) {
                         groups.add("g" + studentsGroup1.getName().toLowerCase() + "@student.unitbv.ro");
                     }
@@ -270,7 +271,7 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
         if (freeOption.getSpecialization() != null) {
             for (int i = 0; i < specializations.length; i++) {
-                if (specializations[i].name().equals(freeOption.getSpecialization().name()) && yearsSpinner.getSelectedItem().toString().equals(freeOption.getYear())) {
+                if (specializations[i].name().equals(freeOption.getSpecialization().name())) {
                     specializationsSpinner.setSelection(i);
                     break;
                 }
@@ -334,9 +335,8 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         groupsSpinner.setAdapter(adapter);
         if (freeOption.getStudentsGroup() != null) {
-            if ((yearsSpinner.getSelectedItem() != null && yearsSpinner.getSelectedItem().toString().equals(freeOption.getYear())) || (specializationsSpinner.getSelectedItem() != null && !((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE))) {
-                groupsSpinner.setSelection(studentsGroups.indexOf(freeOption.getStudentsGroup()));
-            }
+
+            groupsSpinner.setSelection(studentsGroups.indexOf(freeOption.getStudentsGroup()));
         } else {
             groupsSpinner.setSelection(0);
         }
@@ -380,7 +380,8 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
 
     @Override
     public void onCreateReservationSucces() {
-        Toast.makeText(UnibookApplication.getInstance(), "Reservation created!", Toast.LENGTH_SHORT).show();
+        String message = "Reservation created successfully!";
+        showMessageDialog(message);
         if (!yearsSpinner.getSelectedItem().equals(0) || !((Specialization) specializationsSpinner.getSelectedItem()).name().equals(YOU_CAN_CHOOSE) || !((StudentsGroup) groupsSpinner.getSelectedItem()).getName().equals(YOU_CAN_CHOOSE)) {
             RelativeLayout.LayoutParams ll = (RelativeLayout.LayoutParams) makeReservationButton.getLayoutParams();
             ll.addRule(RelativeLayout.ALIGN_PARENT_START);
@@ -395,12 +396,27 @@ public class FreeOptionActivity extends AppCompatActivity implements FreeOptionC
             case android.R.id.home:
                 Intent intent = new Intent(this, ReservationActivity.class);
                 intent.putExtra("toFilterFrom", fromFilter);
-                intent.putExtra("classroom", freeOption.getClassroom());
+                if(fromFilter.equals(ToFilterFrom.FROM_CLASSROOM)) {
+                    intent.putExtra("classroom", freeOption.getClassroom());
+                }
                 intent.putExtra("filter", filter);
                 startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void showMessageDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.primaryTextColor));
     }
 }

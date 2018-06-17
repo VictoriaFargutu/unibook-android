@@ -2,16 +2,11 @@ package com.fargutuvictoria.commons.model;
 
 import java.io.Serializable;
 
-/**
- * Created by fargutuvictoria on 07/03/2018.
- */
-
 public class User implements Serializable {
     private Long id;
     private String email;
     private String firstName;
     private String lastName;
-
 
     public Long getId() {
         return id;
